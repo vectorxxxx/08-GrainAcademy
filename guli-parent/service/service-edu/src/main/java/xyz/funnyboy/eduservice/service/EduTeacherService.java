@@ -1,10 +1,10 @@
-package xyz.funnyboy.serviceedu.service;
+package xyz.funnyboy.eduservice.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.funnyboy.serviceedu.entity.EduTeacher;
-import xyz.funnyboy.serviceedu.entity.vo.EduTeacherQuery;
+import xyz.funnyboy.eduservice.entity.EduTeacher;
+import xyz.funnyboy.eduservice.entity.vo.EduTeacherQuery;
 
 /**
  * <p>

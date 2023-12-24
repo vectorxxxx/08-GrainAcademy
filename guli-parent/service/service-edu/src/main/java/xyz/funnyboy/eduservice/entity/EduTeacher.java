@@ -1,4 +1,4 @@
-package xyz.funnyboy.serviceedu.entity;
+package xyz.funnyboy.eduservice.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;

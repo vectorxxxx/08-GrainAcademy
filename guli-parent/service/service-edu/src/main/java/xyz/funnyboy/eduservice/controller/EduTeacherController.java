@@ -1,4 +1,4 @@
-package xyz.funnyboy.serviceedu.controller;
+package xyz.funnyboy.eduservice.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -7,11 +7,9 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.funnyboy.commonutils.R;
-import xyz.funnyboy.commonutils.ResultCode;
-import xyz.funnyboy.servicebase.exception.GuliException;
-import xyz.funnyboy.serviceedu.entity.EduTeacher;
-import xyz.funnyboy.serviceedu.entity.vo.EduTeacherQuery;
-import xyz.funnyboy.serviceedu.service.EduTeacherService;
+import xyz.funnyboy.eduservice.entity.EduTeacher;
+import xyz.funnyboy.eduservice.entity.vo.EduTeacherQuery;
+import xyz.funnyboy.eduservice.service.EduTeacherService;
 
 import java.util.List;
 
@@ -25,7 +23,7 @@ import java.util.List;
  */
 @Api(description = "讲师管理")
 @RestController
-@RequestMapping("/serviceedu/edu-teacher")
+@RequestMapping("/eduservice/teacher")
 // 跨域
 @CrossOrigin
 public class EduTeacherController
@@ -36,12 +34,12 @@ public class EduTeacherController
     @ApiOperation(value = "所有讲师列表")
     @GetMapping
     public R list() {
-        try {
-            int i = 10 / 0;
-        }
-        catch (Exception e) {
-            throw new GuliException(ResultCode.ERROR, "自定义异常");
-        }
+        // try {
+        //     int i = 10 / 0;
+        // }
+        // catch (Exception e) {
+        //     throw new GuliException(ResultCode.ERROR, "自定义异常");
+        // }
         final List<EduTeacher> teacherlist = eduTeacherService.list(null);
         return R.ok()
                 .data("items", teacherlist);
@@ -57,7 +55,7 @@ public class EduTeacherController
     }
 
     @ApiOperation(value = "分页讲师列表")
-    @GetMapping("{page}/{limit}")
+    @PostMapping("{page}/{limit}")
     public R pageList(
             @ApiParam(name = "page",
                       value = "当前页码",
@@ -74,6 +72,7 @@ public class EduTeacherController
             @ApiParam(name = "teacherQuery",
                       value = "查询对象",
                       required = true)
+            @RequestBody(required = false)
                     EduTeacherQuery teacherQuery) {
         final Page<EduTeacher> pageParam = new Page<>(page, limit);
         eduTeacherService.pageQuery(pageParam, teacherQuery);

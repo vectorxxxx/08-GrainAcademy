@@ -1,4 +1,4 @@
-package xyz.funnyboy.serviceedu.service.impl;
+package xyz.funnyboy.eduservice.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
-import xyz.funnyboy.serviceedu.entity.EduTeacher;
-import xyz.funnyboy.serviceedu.entity.vo.EduTeacherQuery;
-import xyz.funnyboy.serviceedu.mapper.EduTeacherMapper;
-import xyz.funnyboy.serviceedu.service.EduTeacherService;
+import xyz.funnyboy.eduservice.entity.EduTeacher;
+import xyz.funnyboy.eduservice.entity.vo.EduTeacherQuery;
+import xyz.funnyboy.eduservice.mapper.EduTeacherMapper;
+import xyz.funnyboy.eduservice.service.EduTeacherService;
 
 /**
  * <p>

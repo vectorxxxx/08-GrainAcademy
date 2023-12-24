@@ -1,7 +1,7 @@
-package xyz.funnyboy.serviceedu.mapper;
+package xyz.funnyboy.eduservice.mapper;
 
-import xyz.funnyboy.serviceedu.entity.EduTeacher;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import xyz.funnyboy.eduservice.entity.EduTeacher;
 
 /**
  * <p>

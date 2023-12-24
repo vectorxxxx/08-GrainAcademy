@@ -1,4 +1,4 @@
-package xyz.funnyboy.serviceedu;
+package xyz.funnyboy.eduservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package xyz.funnyboy.serviceedu.entity.vo;
+package xyz.funnyboy.eduservice.entity.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
