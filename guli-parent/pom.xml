@@ -17,8 +17,6 @@
     <modules>
         <module>service</module>
         <module>common</module>
-        <module>service-base</module>
-        <module>service-base</module>
     </modules>
 
     <properties>

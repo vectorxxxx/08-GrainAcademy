@@ -11,6 +11,8 @@ import xyz.funnyboy.eduservice.entity.vo.EduTeacherQuery;
 import xyz.funnyboy.eduservice.mapper.EduTeacherMapper;
 import xyz.funnyboy.eduservice.service.EduTeacherService;
 
+import java.io.Serializable;
+
 /**
  * <p>
  * 讲师 服务实现类
@@ -59,5 +61,10 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
         }
 
         return baseMapper.selectPage(pageParam, queryWrapper);
+    }
+
+    @Override
+    public boolean removeById(Serializable id) {
+        return baseMapper.deleteById(id) > 0;
     }
 }

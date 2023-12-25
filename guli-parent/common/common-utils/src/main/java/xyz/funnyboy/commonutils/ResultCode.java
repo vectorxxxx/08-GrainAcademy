@@ -10,4 +10,5 @@ public interface ResultCode
 {
     Integer SUCCESS = 20000;
     Integer ERROR = 20001;
+    Integer UPLOAD_AVATAR_ERROR = 20002;
 }

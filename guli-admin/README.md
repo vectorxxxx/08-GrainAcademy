@@ -1,88 +1,24 @@
-# vue-admin-template
+### 1、`$router` 和 `$route` 的区别
 
-> A minimal vue admin template with Element UI & axios & iconfont & permission control & lint
+- `this.$router` 是 Vue Router 实例，用来导航跳转和管理路由的对象，可以通过它来进行编程式导航和访问路由的信息
+- `this.$route` 是当前活跃的路由信息对象，包含了当前路由的各种信息，如路径、参数、查询参数、hash 等，可以通过它来访问当前路由的信息
 
-**Live demo:** http://panjiachen.github.io/vue-admin-template
+### 2、vue 中 process.env 表示什么意思
 
-[中文文档](https://github.com/PanJiaChen/vue-admin-template/blob/master/README-zh.md)
+在 Vue.js 中,`process.env` 是一个对象,其中包含一些环境变量,这些变量可以用于条件地配置应用程序。这些变量通常由服务器或构建工具提供,以便在开发和生产环境中使用不同的设置。
 
-## Build Setup
+在 Vue.js 中,您可以使用 `process.env` 来检查某些条件,例如:
 
-```bash
-# Clone project
-git clone https://github.com/PanJiaChen/vue-admin-template.git
-
-# Install dependencies
-npm install
-
-# Serve with hot reload at localhost:9528
-npm run dev
-
-# Build for production with minification
-npm run build
-
-# Build for production and view the bundle analyzer report
-npm run build --report
-```
-
-## Demo
-
-![demo](https://github.com/PanJiaChen/PanJiaChen.github.io/blob/master/images/demo.gif)
-
-## Extra
-
-If you want router permission && generate menu by user roles , you can use this branch [permission-control](https://github.com/PanJiaChen/vue-admin-template/tree/permission-control)
-
-This project is based on `webpack4` development. If you want to use `webpack3` development, please use this branch [webpack3](https://github.com/PanJiaChen/vue-admin-template/tree/webpack3)
-
-For `typescript` version, you can use [vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template) (Credits: [@Armour](https://github.com/Armour))
-
-## Related Project
-
-[vue-element-admin](https://github.com/PanJiaChen/vue-element-admin)
-
-[electron-vue-admin](https://github.com/PanJiaChen/electron-vue-admin)
-
-[vue-typescript-admin-template](https://github.com/Armour/vue-typescript-admin-template)
-
-### Element-Ui using cdn tutorial
-
-First find `index.html`([root directory](https://github.com/PanJiaChen/vue-admin-template/blob/element-ui-cdn/index.html))
-
-Import css and js of `Element`, and then import vue. Because `Element` is vue-dependent, vue must be import before it.
-
-Then find [webpack.base.conf.js](https://github.com/PanJiaChen/vue-admin-template/blob/element-ui-cdn/build/webpack.base.conf.js)
-Add `externals` to make webpack not package vue and element.
-
-```
-externals: {
-  vue: 'Vue',
-  'element-ui':'ELEMENT'
+```javascript
+if (process.env.NODE_ENV === "development") {
+  // 开发环境下的代码
+} else if (process.env.NODE_ENV === "production") {
+  // 生产环境下的代码
 }
 ```
 
-Finally there is a small detail to pay attention to that if you import vue in global, you don't need to manually `Vue.use(Vuex)`, it will be automatically mounted, see
-[issue](https://github.com/vuejs/vuex/issues/731)
+在这个例子中,我们使用 `process.env.NODE_ENV` 来检查当前应用程序运行在开发还是生产环境下。如果 `NODE_ENV` 的值为 `'development'`,则执行开发环境下的代码;如果 `NODE_ENV` 的值为 `'production'`,则执行生产环境下的代码。
 
-And you can use `npm run build --report` to see the effect
+`process.env` 对象中还有其他环境变量,例如 `BASE_URL` 和 `API_URL`,这些变量可以用于配置应用程序的 URL。
 
-Pictured:
-![demo](https://panjiachen.github.io/images/element-cdn.png)
-
-**[Detailed code](https://github.com/PanJiaChen/vue-admin-template/commit/746aff560932704ae821f82f10b8b2a9681d5177)**
-
-**[Branch](https://github.com/PanJiaChen/vue-admin-template/tree/element-ui-cdn)**
-
-## Browsers support
-
-Modern browsers and Internet Explorer 10+.
-
-| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari |
-| --------- | --------- | --------- | --------- |
-| IE10, IE11, Edge| last 2 versions| last 2 versions| last 2 versions
-
-## License
-
-[MIT](https://github.com/PanJiaChen/vue-admin-template/blob/master/LICENSE) license.
-
-Copyright (c) 2017-present PanJiaChen
+请注意,`process.env` 对象在 Vue.js 组件中是全局的,这意味着您可以在组件的任意位置使用它,而不需要使用 `this` 引用。

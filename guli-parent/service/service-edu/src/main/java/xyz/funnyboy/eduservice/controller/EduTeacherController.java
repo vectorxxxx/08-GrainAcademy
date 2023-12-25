@@ -50,8 +50,11 @@ public class EduTeacherController
     public R removeById(
             @PathVariable
                     String id) {
-        eduTeacherService.removeById(id);
-        return R.ok();
+        final boolean remove = eduTeacherService.removeById(id);
+        return remove ?
+               R.ok() :
+               R.error()
+                .message("删除失败");
     }
 
     @ApiOperation(value = "分页讲师列表")
