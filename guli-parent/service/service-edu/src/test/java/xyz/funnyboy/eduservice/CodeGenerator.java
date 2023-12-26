@@ -65,7 +65,8 @@ public class CodeGenerator
 
         // 5、策略配置
         final StrategyConfig sc = new StrategyConfig();
-        sc.setInclude("edu_teacher");
+        // sc.setInclude("edu_teacher");
+        sc.setInclude("edu_subject");
         // 数据库表映射到实体的命名策略
         sc.setNaming(NamingStrategy.underline_to_camel);
         // 生成实体时去掉表前缀

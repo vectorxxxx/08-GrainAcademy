@@ -18,13 +18,13 @@ import java.util.Date;
  * @author vectorx
  * @since 2023-12-23
  */
+@ApiModel(value = "EduTeacher对象",
+          description = "讲师")
 @Data
 // 不调用父类的实现
 @EqualsAndHashCode(callSuper = false)
 // 指定在getter和setter方法中使用链式调用
 @Accessors(chain = true)
-@ApiModel(value = "EduTeacher对象",
-          description = "讲师")
 public class EduTeacher implements Serializable
 {
 
