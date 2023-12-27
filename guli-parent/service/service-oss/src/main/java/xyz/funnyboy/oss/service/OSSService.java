@@ -12,10 +12,10 @@ import org.springframework.web.multipart.MultipartFile;
 public interface OSSService
 {
     /**
-     * 上传头像
+     * 上传
      *
      * @param file 文件
      * @return {@link String}
      */
-    String uploadAvatar(MultipartFile file);
+    String uploadFile(MultipartFile file);
 }

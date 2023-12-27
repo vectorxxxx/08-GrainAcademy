@@ -22,8 +22,16 @@ import Layout from '../views/layout/Layout'
   }
 **/
 export const constantRouterMap = [
-  { path: '/login', component: () => import('@/views/login/index'), hidden: true },
-  { path: '/404', component: () => import('@/views/404'), hidden: true },
+  {
+    path: '/login',
+    component: () => import('@/views/login/index'),
+    hidden: true
+  },
+  {
+    path: '/404',
+    component: () => import('@/views/404'),
+    hidden: true
+  },
 
   // 首页
   {
@@ -32,11 +40,13 @@ export const constantRouterMap = [
     redirect: '/dashboard',
     name: 'Dashboard',
     hidden: true,
-    children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: '谷粒学院后台首页', icon: 'dashboard' }
-    }]
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        meta: { title: '谷粒学院后台首页', icon: 'dashboard' }
+      }
+    ]
   },
 
   // 讲师管理
@@ -45,7 +55,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/edu/teacher/list',
     name: 'Teacher',
-    meta: { title: '讲师管理', icon: 'peoples' },
+    meta: { title: '讲师管理', icon: 'user' },
     children: [
       {
         path: 'list',
@@ -68,6 +78,7 @@ export const constantRouterMap = [
       }
     ]
   },
+
   // 课程分类管理
   {
     path: '/edu/subject',
@@ -91,8 +102,52 @@ export const constantRouterMap = [
     ]
   },
 
+  // 课程管理
+  {
+    path: '/edu/course',
+    component: Layout,
+    redirect: '/edu/course/list',
+    name: 'Course',
+    meta: { title: '课程管理', icon: 'form' },
+    children: [
+      {
+        path: 'list',
+        name: 'EduCourseList',
+        component: () => import('@/views/edu/course/list'),
+        meta: { title: '课程列表' }
+      },
+      {
+        path: 'info',
+        name: 'EduCourseInfo',
+        component: () => import('@/views/edu/course/info'),
+        meta: { title: '发布课程' }
+      },
+      {
+        path: 'info/:id',
+        name: 'EduCourseInfoEdit',
+        component: () => import('@/views/edu/course/info'),
+        meta: { title: '编辑课程基本信息', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'chapter/:id',
+        name: 'EduCourseChapter',
+        component: () => import('@/views/edu/course/chapter'),
+        meta: { title: '课程大纲', noCache: true },
+        hidden: true
+      },
+      {
+        path: 'publish/:id',
+        name: 'EduCoursePublish',
+        component: () => import('@/views/edu/course/publish'),
+        meta: { title: '发布课程', noCache: true },
+        hidden: true
+      }
+    ]
+  },
+
   { path: '*', redirect: '/404', hidden: true }
-]
+];
 
 export default new Router({
   // mode: 'history', //后端支持可开

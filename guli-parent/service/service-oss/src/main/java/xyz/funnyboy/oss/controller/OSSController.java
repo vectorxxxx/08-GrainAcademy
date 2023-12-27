@@ -25,15 +25,18 @@ public class OSSController
     @Autowired
     private OSSService ossService;
 
-    @ApiOperation(value = "上传头像")
-    @PostMapping("/upload/avatar")
-    public R uploadAvatar(
+    @ApiOperation(value = "上传")
+    @PostMapping("/upload/file")
+    public R uploadFile(
             @ApiParam(name = "file",
-                      value = "头像文件",
+                      value = "文件",
                       required = true)
             @RequestParam("file")
-                    MultipartFile file) {
-        final String url = ossService.uploadAvatar(file);
+                    MultipartFile file,
+            @ApiParam(name = "host",
+                      value = "文件上传路径")
+                    String host) {
+        final String url = ossService.uploadFile(file);
         return R.ok()
                 .message("头像上传成功")
                 .data("url", url);

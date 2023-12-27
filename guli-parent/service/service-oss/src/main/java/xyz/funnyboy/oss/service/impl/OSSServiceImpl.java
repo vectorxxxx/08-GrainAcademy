@@ -27,13 +27,13 @@ import java.util.UUID;
 public class OSSServiceImpl implements OSSService
 {
     /**
-     * 上传头像
+     * 上传
      *
      * @param file 文件
      * @return {@link String}
      */
     @Override
-    public String uploadAvatar(MultipartFile file) {
+    public String uploadFile(MultipartFile file) {
         // 获取 OSS 配置信息
         final String endPoint = ConstantPropertiesUtil.END_POINT;
         final String accessKeyId = ConstantPropertiesUtil.ACCESS_KEY_ID;
