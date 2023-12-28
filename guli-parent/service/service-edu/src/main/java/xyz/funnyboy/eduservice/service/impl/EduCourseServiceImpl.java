@@ -1,17 +1,23 @@
 package xyz.funnyboy.eduservice.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import xyz.funnyboy.commonutils.ResultCode;
 import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.EduCourseDescription;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
 import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseQuery;
 import xyz.funnyboy.eduservice.mapper.EduCourseMapper;
+import xyz.funnyboy.eduservice.service.EduChapterService;
 import xyz.funnyboy.eduservice.service.EduCourseDescriptionService;
 import xyz.funnyboy.eduservice.service.EduCourseService;
+import xyz.funnyboy.eduservice.service.EduVideoService;
 import xyz.funnyboy.servicebase.exception.GuliException;
 
 /**
@@ -28,6 +34,12 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
     @Autowired
     private EduCourseDescriptionService eduCourseDescriptionService;
+
+    @Autowired
+    private EduVideoService eduVideoService;
+
+    @Autowired
+    private EduChapterService eduChapterService;
 
     /**
      * 保存课程信息
@@ -136,5 +148,64 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         if (!update) {
             throw new GuliException(ResultCode.ERROR, "发布课程失败");
         }
+    }
+
+    /**
+     * 分页查询课程信息
+     *
+     * @param pageParam   页面参数
+     * @param courseQuery 查询条件
+     */
+    @Override
+    public void pageQuery(Page<EduCourse> pageParam, CourseQuery courseQuery) {
+        final LambdaQueryWrapper<EduCourse> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.orderByAsc(EduCourse::getGmtCreate);
+        if (courseQuery == null) {
+            this.page(pageParam, queryWrapper);
+            return;
+        }
+
+        // 课程标题
+        final String title = courseQuery.getTitle();
+        if (!StringUtils.isEmpty(title)) {
+            queryWrapper.like(EduCourse::getTitle, title);
+        }
+
+        // 讲师ID
+        final String teacherId = courseQuery.getTeacherId();
+        if (!StringUtils.isEmpty(teacherId)) {
+            queryWrapper.eq(EduCourse::getTeacherId, teacherId);
+        }
+
+        // 一级类别ID
+        final String subjectParentId = courseQuery.getSubjectParentId();
+        if (!StringUtils.isEmpty(subjectParentId)) {
+            queryWrapper.eq(EduCourse::getSubjectParentId, subjectParentId);
+        }
+
+        // 二级类别ID
+        final String sujectId = courseQuery.getSujectId();
+        if (!StringUtils.isEmpty(sujectId)) {
+            queryWrapper.eq(EduCourse::getSubjectId, sujectId);
+        }
+
+        this.page(pageParam, queryWrapper);
+    }
+
+    /**
+     * 按 ID 删除课程
+     *
+     * @param courseId 课程编号
+     */
+    @Override
+    public void removeCourseById(String courseId) {
+        // 按 ID 删除所有视频
+        eduVideoService.removeByCourseId(courseId);
+
+        // 按 ID 删除所有章节
+        eduChapterService.removeByCourseId(courseId);
+
+        // 按 ID 删除课程
+        this.removeById(courseId);
     }
 }

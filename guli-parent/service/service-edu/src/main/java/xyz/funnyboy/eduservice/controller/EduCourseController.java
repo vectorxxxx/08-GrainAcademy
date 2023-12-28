@@ -1,5 +1,6 @@
 package xyz.funnyboy.eduservice.controller;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -7,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import xyz.funnyboy.commonutils.R;
+import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
 import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseQuery;
 import xyz.funnyboy.eduservice.service.EduCourseService;
 
 /**
@@ -68,9 +71,9 @@ public class EduCourseController
                       required = true)
             @RequestBody
                     CourseInfoVO courseInfoVO) {
-        eduCourseService.updateCourseInfoById(courseInfoVO);
+        final String id = eduCourseService.updateCourseInfoById(courseInfoVO);
         return R.ok()
-                .data("courseId", courseInfoVO.getId());
+                .data("courseId", id);
     }
 
     @ApiOperation(value = "根据课程ID获取课程发布信息")
@@ -95,6 +98,45 @@ public class EduCourseController
             @PathVariable
                     String courseId) {
         eduCourseService.publishCourse(courseId);
+        return R.ok();
+    }
+
+    @ApiOperation(value = "根据条件查询课程信息")
+    @PostMapping("{page}/{limit}")
+    public R pageQuery(
+            @ApiParam(name = "page",
+                      value = "当前页码",
+                      required = true)
+            @PathVariable
+                    long page,
+
+            @ApiParam(name = "limit",
+                      value = "每页记录数",
+                      required = true)
+            @PathVariable
+                    long limit,
+
+            @ApiParam(name = "searchObj",
+                      value = "查询条件",
+                      required = false)
+            @RequestBody
+                    CourseQuery courseQuery) {
+        final Page<EduCourse> pageParam = new Page<>(page, limit);
+        eduCourseService.pageQuery(pageParam, courseQuery);
+        return R.ok()
+                .data("total", pageParam.getTotal())
+                .data("rows", pageParam.getRecords());
+    }
+
+    @ApiOperation(value = "根据课程id删除课程")
+    @DeleteMapping("{courseId}")
+    public R removeCourseById(
+            @ApiParam(name = "courseId",
+                      value = "课程id",
+                      required = true)
+            @PathVariable
+                    String courseId) {
+        eduCourseService.removeCourseById(courseId);
         return R.ok();
     }
 }

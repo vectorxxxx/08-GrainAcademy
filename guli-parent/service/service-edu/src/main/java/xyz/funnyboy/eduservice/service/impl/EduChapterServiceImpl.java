@@ -76,6 +76,18 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         return chapterVOList;
     }
 
+    /**
+     * 按课程 ID 删除
+     *
+     * @param courseId 课程编号
+     */
+    @Override
+    public void removeByCourseId(String courseId) {
+        final LambdaQueryWrapper<EduChapter> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(EduChapter::getCourseId, courseId);
+        this.remove(queryWrapper);
+    }
+
     @Override
     public boolean removeById(Serializable id) {
         if (eduVideoService.existByChapterId(id)) {

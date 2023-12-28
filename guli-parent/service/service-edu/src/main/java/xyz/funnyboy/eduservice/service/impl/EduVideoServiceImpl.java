@@ -81,4 +81,16 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
             throw new GuliException(ResultCode.ERROR, "课时信息更新失败");
         }
     }
+
+    /**
+     * 按课程 ID 删除
+     *
+     * @param courseId 课程编号
+     */
+    @Override
+    public void removeByCourseId(String courseId) {
+        final LambdaQueryWrapper<EduVideo> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(EduVideo::getCourseId, courseId);
+        this.remove(queryWrapper);
+    }
 }

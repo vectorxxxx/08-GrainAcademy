@@ -1,9 +1,11 @@
 package xyz.funnyboy.eduservice.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
 import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseQuery;
 
 /**
  * <p>
@@ -53,4 +55,19 @@ public interface EduCourseService extends IService<EduCourse>
      * @param courseId 课程编号
      */
     void publishCourse(String courseId);
+
+    /**
+     * 页面查询 分页查询课程信息
+     *
+     * @param pageParam   页面参数
+     * @param courseQuery 查询条件
+     */
+    void pageQuery(Page<EduCourse> pageParam, CourseQuery courseQuery);
+
+    /**
+     * 按 ID 删除课程
+     *
+     * @param courseId 课程编号
+     */
+    void removeCourseById(String courseId);
 }

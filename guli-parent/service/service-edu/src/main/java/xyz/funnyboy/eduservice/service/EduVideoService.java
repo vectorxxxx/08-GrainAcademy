@@ -46,4 +46,11 @@ public interface EduVideoService extends IService<EduVideo>
      * @param videoVO 视频配音
      */
     void updateVideoVO(VideoVO videoVO);
+
+    /**
+     * 按课程 ID 删除
+     *
+     * @param courseId 课程编号
+     */
+    void removeByCourseId(String courseId);
 }
