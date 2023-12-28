@@ -8,6 +8,7 @@ import xyz.funnyboy.commonutils.ResultCode;
 import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.EduCourseDescription;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
+import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
 import xyz.funnyboy.eduservice.mapper.EduCourseMapper;
 import xyz.funnyboy.eduservice.service.EduCourseDescriptionService;
 import xyz.funnyboy.eduservice.service.EduCourseService;
@@ -38,7 +39,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     public String saveCourseInfo(CourseInfoVO courseInfoVO) {
         // 保存课程基本信息
         final EduCourse eduCourse = new EduCourse();
-        eduCourse.setStatus(EduCourse.COURSE_NORMAL);
+        eduCourse.setStatus(EduCourse.COURSE_DRAFT);
         BeanUtils.copyProperties(courseInfoVO, eduCourse);
         final boolean save = this.save(eduCourse);
         if (!save) {
@@ -87,7 +88,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
      * @param courseInfoVO 课程信息 VO
      */
     @Override
-    public void updateCourseInfoById(CourseInfoVO courseInfoVO) {
+    public String updateCourseInfoById(CourseInfoVO courseInfoVO) {
         // 更新课程信息
         EduCourse eduCourse = new EduCourse();
         BeanUtils.copyProperties(courseInfoVO, eduCourse);
@@ -96,13 +97,44 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             throw new GuliException(ResultCode.ERROR, "更新课程信息失败");
         }
 
+        final String id = courseInfoVO.getId();
+
         // 更新课程简介
         EduCourseDescription eduCourseDescription = new EduCourseDescription();
-        eduCourseDescription.setId(courseInfoVO.getId());
+        eduCourseDescription.setId(id);
         eduCourseDescription.setDescription(courseInfoVO.getDescription());
         final boolean update1 = eduCourseDescriptionService.updateById(eduCourseDescription);
         if (!update1) {
             throw new GuliException(ResultCode.ERROR, "更新课程简介失败");
+        }
+
+        return id;
+    }
+
+    /**
+     * 根据课程ID获取课程发布信息
+     *
+     * @param courseId 编号
+     * @return {@link CoursePublishVO}
+     */
+    @Override
+    public CoursePublishVO getCoursePublishVOById(String courseId) {
+        return baseMapper.selectCoursePublishVOById(courseId);
+    }
+
+    /**
+     * 发布课程
+     *
+     * @param courseId 课程编号
+     */
+    @Override
+    public void publishCourse(String courseId) {
+        EduCourse eduCourse = new EduCourse();
+        eduCourse.setId(courseId);
+        eduCourse.setStatus(EduCourse.COURSE_NORMAL);
+        final boolean update = this.updateById(eduCourse);
+        if (!update) {
+            throw new GuliException(ResultCode.ERROR, "发布课程失败");
         }
     }
 }

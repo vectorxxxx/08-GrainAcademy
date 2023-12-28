@@ -5,8 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-
-import java.io.Serializable;
+import xyz.funnyboy.eduservice.entity.base.BaseEntity;
 
 /**
  * <p>
@@ -21,7 +20,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @ApiModel(value = "EduVideo对象",
           description = "课程视频")
-public class EduVideo implements Serializable
+public class EduVideo extends BaseEntity
 {
 
     private static final long serialVersionUID = 1L;

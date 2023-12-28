@@ -1,7 +1,10 @@
 package xyz.funnyboy.eduservice.service;
 
-import xyz.funnyboy.eduservice.entity.EduVideo;
 import com.baomidou.mybatisplus.extension.service.IService;
+import xyz.funnyboy.eduservice.entity.EduVideo;
+import xyz.funnyboy.eduservice.entity.vo.VideoVO;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -11,6 +14,36 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author vectorx
  * @since 2023-12-26
  */
-public interface EduVideoService extends IService<EduVideo> {
+public interface EduVideoService extends IService<EduVideo>
+{
 
+    /**
+     * 按章节 ID 获取课时
+     *
+     * @param id 编号
+     * @return boolean
+     */
+    boolean existByChapterId(Serializable id);
+
+    /**
+     * 保存视频 VO
+     *
+     * @param videoVO 视频VO
+     */
+    void saveVideoVO(VideoVO videoVO);
+
+    /**
+     * 根据 ID获取视频 Vo
+     *
+     * @param id 编号
+     * @return {@link VideoVO}
+     */
+    VideoVO getVideoVOById(String id);
+
+    /**
+     * 更新视频VO
+     *
+     * @param videoVO 视频配音
+     */
+    void updateVideoVO(VideoVO videoVO);
 }

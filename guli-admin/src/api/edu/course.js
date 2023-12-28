@@ -25,5 +25,19 @@ export default {
       method: 'put',
       data: courseInfo
     });
+  },
+  // 根据课程id获取课程基本预览信息
+  getCoursePublishInfoById(courseId) {
+    return request({
+      url: `${api_name}/getCoursePublishInfo/${courseId}`,
+      method: 'get'
+    })
+  },
+  // 课程最终发布
+  publishCourse(courseId) {
+    return request({
+      url: `${api_name}/publishCourse/${courseId}`,
+      method: 'put'
+    })
   }
 };

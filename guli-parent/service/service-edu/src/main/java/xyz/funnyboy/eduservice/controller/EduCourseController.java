@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import xyz.funnyboy.commonutils.R;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
+import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
 import xyz.funnyboy.eduservice.service.EduCourseService;
 
 /**
@@ -35,10 +36,10 @@ public class EduCourseController
                       required = true)
             @RequestBody
                     CourseInfoVO courseInfoVO) {
-        final String courseInfo = eduCourseService.saveCourseInfo(courseInfoVO);
-        if (!StringUtils.isEmpty(courseInfo)) {
+        final String courseId = eduCourseService.saveCourseInfo(courseInfoVO);
+        if (!StringUtils.isEmpty(courseId)) {
             return R.ok()
-                    .data("courseId", courseInfo);
+                    .data("courseId", courseId);
         }
         else {
             return R.error()
@@ -68,6 +69,32 @@ public class EduCourseController
             @RequestBody
                     CourseInfoVO courseInfoVO) {
         eduCourseService.updateCourseInfoById(courseInfoVO);
+        return R.ok()
+                .data("courseId", courseInfoVO.getId());
+    }
+
+    @ApiOperation(value = "根据课程ID获取课程发布信息")
+    @GetMapping("getCoursePublishInfo/{courseId}")
+    public R getCoursePublishVOById(
+            @ApiParam(name = "courseId",
+                      value = "课程id",
+                      required = true)
+            @PathVariable
+                    String courseId) {
+        final CoursePublishVO coursePublishVO = eduCourseService.getCoursePublishVOById(courseId);
+        return R.ok()
+                .data("item", coursePublishVO);
+    }
+
+    @ApiOperation(value = "根据课程ID发布课程")
+    @PutMapping("publishCourse/{courseId}")
+    public R publishCourse(
+            @ApiParam(name = "courseId",
+                      value = "课程id",
+                      required = true)
+            @PathVariable
+                    String courseId) {
+        eduCourseService.publishCourse(courseId);
         return R.ok();
     }
 }

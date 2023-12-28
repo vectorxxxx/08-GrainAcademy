@@ -3,6 +3,7 @@ package xyz.funnyboy.eduservice.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
+import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
 
 /**
  * <p>
@@ -36,5 +37,20 @@ public interface EduCourseService extends IService<EduCourse>
      *
      * @param courseInfoVO 课程信息 VO
      */
-    void updateCourseInfoById(CourseInfoVO courseInfoVO);
+    String updateCourseInfoById(CourseInfoVO courseInfoVO);
+
+    /**
+     * 根据课程ID获取课程发布信息
+     *
+     * @param courseId 编号
+     * @return {@link CoursePublishVO}
+     */
+    CoursePublishVO getCoursePublishVOById(String courseId);
+
+    /**
+     * 发布课程
+     *
+     * @param courseId 课程编号
+     */
+    void publishCourse(String courseId);
 }

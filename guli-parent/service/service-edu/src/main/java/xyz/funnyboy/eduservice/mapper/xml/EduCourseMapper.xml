@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xyz.funnyboy.eduservice.mapper.EduCourseMapper">
-
+    <select id="selectCoursePublishVOById" resultType="xyz.funnyboy.eduservice.entity.vo.CoursePublishVO">
+        select c.title,
+               c.cover,
+               c.lesson_num                     as lessonNum,
+               s1.title                         as subjectLevelOne,
+               s2.title                         as subjectLevelTwo,
+               t.name                           as teacherName,
+               CONVERT(c.price, decimal (8, 2)) as price
+        from edu_course c
+                 left join edu_teacher t on c.teacher_id = t.id
+                 left join edu_subject s1 on c.subject_id = s1.id
+                 left join edu_subject s2 on c.subject_parent_id = s2.id
+        where c.id = #{courseId}
+    </select>
 </mapper>
