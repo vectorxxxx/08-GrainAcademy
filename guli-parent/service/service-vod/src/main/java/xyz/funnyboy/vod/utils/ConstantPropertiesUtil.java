@@ -1,4 +1,4 @@
-package xyz.funnyboy.oss.utils;
+package xyz.funnyboy.vod.utils;
 
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.InitializingBean;
@@ -6,31 +6,22 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
- * OSS配置类
+ * VOD配置类
  *
  * @author VectorX
  * @version V1.0
- * @date 2023-12-25 21:17:38
+ * @date 2023-12-28 19:45:40
  */
 @Component
 public class ConstantPropertiesUtil implements InitializingBean
 {
-    @Value("${aliyun.oss.file.endpoint}")
-    private String endpoint;
-    @Value("${aliyun.oss.file.accessKeyId}")
+    @Value("${aliyun.vod.file.accesskeyid}")
     private String accessKeyId;
-    @Value("${aliyun.oss.file.accessKeySecret}")
+    @Value("${aliyun.vod.file.accesskeysecret}")
     private String accessKeySecret;
-    @Value("${aliyun.oss.file.bucketName}")
-    private String bucketName;
-    @Value("${aliyun.oss.file.protocol}")
-    private String protocol;
 
-    public static String END_POINT;
     public static String ACCESS_KEY_ID;
     public static String ACCESS_KEY_SECRET;
-    public static String BUCKET_NAME;
-    public static String PROTOCOL;
 
     /**
      * Invoked by the containing {@code BeanFactory} after it has set all bean properties and satisfied {@link BeanFactoryAware}, {@code ApplicationContextAware} etc.
@@ -41,10 +32,7 @@ public class ConstantPropertiesUtil implements InitializingBean
      */
     @Override
     public void afterPropertiesSet() throws Exception {
-        END_POINT = endpoint;
         ACCESS_KEY_ID = accessKeyId;
         ACCESS_KEY_SECRET = accessKeySecret;
-        BUCKET_NAME = bucketName;
-        PROTOCOL = protocol;
     }
 }

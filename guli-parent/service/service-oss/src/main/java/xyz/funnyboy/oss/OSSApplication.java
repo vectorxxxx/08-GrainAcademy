@@ -3,7 +3,6 @@ package xyz.funnyboy.oss;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
 
 /**
  * OSS启动类
@@ -12,11 +11,11 @@ import org.springframework.context.annotation.ComponentScan;
  * @version V1.0
  * @date 2023-12-25 21:14:33
  */
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
-@ComponentScan({"xyz.funnyboy"})
-public class OSSAplication
+@SpringBootApplication(scanBasePackages = {"xyz.funnyboy"},
+                       exclude = DataSourceAutoConfiguration.class)
+public class OSSApplication
 {
     public static void main(String[] args) {
-        SpringApplication.run(OSSAplication.class, args);
+        SpringApplication.run(OSSApplication.class, args);
     }
 }

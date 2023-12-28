@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="x-ua-compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <title>Vod</title>
+    <link
+      rel="stylesheet"
+      href="https://g.alicdn.com/apsara-media-box/imp-web-player/2.16.3/skins/default/aliplayer-min.css"
+    />
+    <script
+      charset="utf-8"
+      type="text/javascript"
+      src="https://g.alicdn.com/apsara-media-box/imp-web-player/2.16.3/aliplayer-min.js"
+    ></script>
+  </head>
+  <body>
+    <div class="prism-player" id="J_prismPlayer"></div>
+    <script>
+      var player = new Aliplayer({
+        id: 'J_prismPlayer',
+        autoplay: true,
+        width: '1920px',
+        height: '1280px',
+        vid: 'a0ceed71a56e71eebfd05420848d0102',
+        playauth:
+          'eyJTZWN1cml0eVRva2VuIjoiQ0FJU2lBTjFxNkZ0NUIyeWZTaklyNWZYUE43dWpvaEh6YnUrTlJMQWhqZGlYdWgvdUtmbDBUejJJSGhNZm5WZ0ErOGNzZlF3bFc1WTd2NGFscklxRzhRYUZSR2ROSk1wdHNRTXIxajRKb0hidk5ldTBic0hoWnY5NStWcjRMMmlqcUhvZU96Y1lJNzMwWjdQQWdtMlEwWVJySkwrY1RLOUphYk1VL21nZ29KbWFkSTZSeFN4YVNFOGF2NWRPZ3BscnIwSVZ4elBNdnIvSFJQMnVtN1pIV3R1dEEwZTgzMTQ1ZmFRejlHaTZ4YlRpM2I5ek9FVXFPYVhKNFMvUGZGb05ZWnlTZjZvd093VUVxL2R5M3hvN3hGYjFhRjRpODRpL0N2YzdQMlFDRU5BK3dtbFB2dTJpOE5vSUYxV2E3UVdJWXRncmZQeGsrWjEySmJOa0lpbDVCdFJFZHR3ZUNuRldLR216c3krYjRIUEROc2ljcXZoTUhuZ3k4MkdNb0tQMHprcGVuVUdMZ2hIQ2JGRFF6MVNjVVY4RVc2S2QvYitvQW1TTWx6OUVQRy92ZnRvZ2NZdi9UTEI1c0dYSWxXRGViS2QzQnNETjRVMEIwRlNiRVpPaHpDeEtQQmNMRndUSWcwM1grN05WL2xhYUJGUHRLWFdtaUgrV3lOcDAzVkxoZnI2YXVOcGJnUHIxVVFwTlJxQUFaYUwzK0RkUjByOGJvS0JrcnYrNnRDY29sUGowM1NqZ050S25yaGpzVlJPS0FlMHk4YlFrZ0NIVXdBdlZJaVBYTW9wV2lCOWV3bUNRYjR5TVJnSnBrdEJlNEwxd1RwNTU4Y3M5dVlST3VsRUtUT3FoYk9zY2IrSDNOUUJ2UGpTclBKdmtIb28zajZkVE9YNlI3OExudjZBT3ViWW9UWTRmUHR2QlViclNCMTZJQUE9IiwiQXV0aEluZm8iOiJ7XCJDSVwiOlwiMElmeStRWEUvRERSSUZRQVFEa3ZlYlZxdVN2SFV3d3hVTExybEgvTjM0MXFRWTVKc0gyNHc5WGt6U3dvdmx5ZFwiLFwiQ2FsbGVyXCI6XCJHUHFkMEhlZnBiMmJhMFFuTXQwZXJGUkpGRnh1UUgxOUttWlFjKzF1bk13PVwiLFwiRXhwaXJlVGltZVwiOlwiMjAyMy0xMi0yOFQxMToyNTo1OFpcIixcIk1lZGlhSWRcIjpcImEwY2VlZDcxYTU2ZTcxZWViZmQwNTQyMDg0OGQwMTAyXCIsXCJTaWduYXR1cmVcIjpcIjBLNURaOU8zWGpPdjYwc1l4eFhFRFFjemVqbz1cIn0iLCJWaWRlb01ldGEiOnsiU3RhdHVzIjoiTm9ybWFsIiwiVmlkZW9JZCI6ImEwY2VlZDcxYTU2ZTcxZWViZmQwNTQyMDg0OGQwMTAyIiwiVGl0bGUiOiI2IC0gV2hhdCBJZiBJIFdhbnQgdG8gTW92ZSBGYXN0ZXIubXA0IiwiQ292ZXJVUkwiOiJodHRwOi8vb3V0aW4tY2FkOWU2MzlhNTZkMTFlZWI4M2EwMDE2M2UxYTYyNWUub3NzLWNuLXNoYW5naGFpLmFsaXl1bmNzLmNvbS9hMGNlZWQ3MWE1NmU3MWVlYmZkMDU0MjA4NDhkMDEwMi9zbmFwc2hvdHMvYTU2MTkyMTMyOWY1NGRjMTg3MGQ1N2NlNzkyZTdiYTYtMDAwMDEuanBnP0V4cGlyZXM9MTcwMzc2NjI1OCZPU1NBY2Nlc3NLZXlJZD1MVEFJeFNhT2ZFekNuQk9qJlNpZ25hdHVyZT1LOXplMThWWHJPRVE3bjNDb3pmNHhBJTJGdWZ5byUzRCIsIkR1cmF0aW9uIjoxNi4yNzY3fSwiQWNjZXNzS2V5SWQiOiJTVFMuTlRid2RaY1dmenlVNzRxYjc3UmdTV2JOMyIsIkFjY2Vzc0tleVNlY3JldCI6IkF5U1puOEZBS2NnREc2NTE5NEVUaEhXQTg0QkNqc1RyQ1BQeHJwTlY5VjlEIiwiUmVnaW9uIjoiY24tc2hhbmdoYWkiLCJDdXN0b21lcklkIjoxODM3ODUxMTAxMDgzNjMxfQ==',
+        cover: '',
+      });
+    </script>
+  </body>
+</html>

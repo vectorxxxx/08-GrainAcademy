@@ -38,3 +38,12 @@ Objects.requireNonNull(str, "str cannot be null");
 在这个例子中，我们使用 `Objects.requireNonNull()` 方法来检查 `str` 是否为 `null`。如果 `str` 为 `null`，则会抛出一个 `NullPointerException` 异常，其中包含了自定义的错误消息 "str cannot be null"。
 
 需要注意的是，`Objects.requireNonNull()` 方法不会修改原始对象，它只会检查对象是否为 `null`，并抛出异常。因此，在使用 `Objects.requireNonNull()` 方法时，不需要担心原始对象会被修改。
+
+
+
+## 3、视频点播服务上传
+
+```bash
+mvn install:install-file -DgroupId=com.aliyun -DartifactId=aliyun-sdk-vod-upload -Dversion=1.4.15 -Dpackaging=jar -Dfile=aliyun-java-vod-upload-1.4.15.jar -Dmaven.repo.local=D:\.m2\repository-mine -s D:\workspace-mine\apache-maven-3.8.3\conf\settings.xml
+```
+
