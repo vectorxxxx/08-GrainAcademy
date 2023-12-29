@@ -2,6 +2,8 @@ package xyz.funnyboy.vod.service;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 /**
  * 视频Service
  *
@@ -20,10 +22,17 @@ public interface VodService
     String uploadVideo(MultipartFile file);
 
     /**
-     * 删除文件
+     * 删除视频
      *
      * @param videoId 视频ID
      * @return {@code true} 删除成功
      */
     void removeVideo(String videoId);
+
+    /**
+     * 删除视频列表
+     *
+     * @param videoIdList 视频 ID 列表
+     */
+    void removeVideoList(List<String> videoIdList);
 }

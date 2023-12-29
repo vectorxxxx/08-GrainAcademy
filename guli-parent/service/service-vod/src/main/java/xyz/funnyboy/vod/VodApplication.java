@@ -3,6 +3,7 @@ package xyz.funnyboy.vod;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * Vod启动类
@@ -13,6 +14,8 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
  */
 @SpringBootApplication(scanBasePackages = "xyz.funnyboy",
                        exclude = DataSourceAutoConfiguration.class)
+// 启动服务注册发现（Nacos）
+@EnableDiscoveryClient
 public class VodApplication
 {
     public static void main(String[] args) {

@@ -18,6 +18,7 @@ import xyz.funnyboy.vod.utils.ConstantPropertiesUtil;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -88,5 +89,16 @@ public class VodServiceImpl implements VodService
             throw new GuliException(ResultCode.ERROR, "视频删除失败");
         }
 
+    }
+
+    /**
+     * 删除视频列表
+     *
+     * @param videoIdList 视频 ID 列表
+     */
+    @Override
+    public void removeVideoList(List<String> videoIdList) {
+        final String videoIds = org.apache.commons.lang.StringUtils.join(videoIdList.toArray(), ",");
+        removeVideo(videoIds);
     }
 }

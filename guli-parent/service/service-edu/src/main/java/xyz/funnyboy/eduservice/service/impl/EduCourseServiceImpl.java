@@ -205,6 +205,9 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         // 按 ID 删除所有章节
         eduChapterService.removeByCourseId(courseId);
 
+        // 按 ID 删除课程简介
+        eduCourseDescriptionService.removeById(courseId);
+
         // 按 ID 删除课程
         this.removeById(courseId);
     }

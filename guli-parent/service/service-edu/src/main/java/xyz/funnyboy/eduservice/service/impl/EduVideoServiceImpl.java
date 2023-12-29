@@ -3,8 +3,13 @@ package xyz.funnyboy.eduservice.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
+import xyz.funnyboy.commonutils.R;
 import xyz.funnyboy.commonutils.ResultCode;
+import xyz.funnyboy.eduservice.client.VodClient;
 import xyz.funnyboy.eduservice.entity.EduVideo;
 import xyz.funnyboy.eduservice.entity.vo.VideoVO;
 import xyz.funnyboy.eduservice.mapper.EduVideoMapper;
@@ -12,6 +17,8 @@ import xyz.funnyboy.eduservice.service.EduVideoService;
 import xyz.funnyboy.servicebase.exception.GuliException;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -24,6 +31,8 @@ import java.io.Serializable;
 @Service
 public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> implements EduVideoService
 {
+    @Autowired
+    private VodClient vodClient;
 
     /**
      * 按章节 ID 获取课时
@@ -89,8 +98,41 @@ public class EduVideoServiceImpl extends ServiceImpl<EduVideoMapper, EduVideo> i
      */
     @Override
     public void removeByCourseId(String courseId) {
+        // 查询所有视频列表
         final LambdaQueryWrapper<EduVideo> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(EduVideo::getCourseId, courseId);
+        final List<EduVideo> videoList = this.list(queryWrapper);
+
+        // 删除云端视频
+        final List<String> videoIdList = videoList.stream()
+                                                  .map(EduVideo::getVideoSourceId)
+                                                  .collect(Collectors.toList());
+        if (!CollectionUtils.isEmpty(videoIdList)) {
+            final R ret = vodClient.removeVideoList(videoIdList);
+            // if (ResultCode.ERROR.equals(ret.getCode())) {
+            //     throw new GuliException(ret.getCode(), ret.getMessage());
+            // }
+        }
+
+        // 删除库中记录
         this.remove(queryWrapper);
+    }
+
+    /**
+     * 按 ID 移除视频
+     *
+     * @param id 编号
+     */
+    @Override
+    public void removeVideoById(String id) {
+        // 删除云端视频
+        final EduVideo eduVideo = this.getById(id);
+        final String videoSourceId = eduVideo.getVideoSourceId();
+        if (!StringUtils.isEmpty(videoSourceId)) {
+            vodClient.removeVideo(videoSourceId);
+        }
+
+        // 删除库中记录
+        this.removeById(id);
     }
 }

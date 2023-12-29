@@ -9,6 +9,8 @@ import org.springframework.web.multipart.MultipartFile;
 import xyz.funnyboy.commonutils.R;
 import xyz.funnyboy.vod.service.VodService;
 
+import java.util.List;
+
 /**
  * VodController
  *
@@ -47,6 +49,19 @@ public class VodController
             @PathVariable
                     String videoId) {
         vodService.removeVideo(videoId);
+        return R.ok()
+                .message("视频删除成功");
+    }
+
+    @ApiOperation(value = "批量删除视频")
+    @DeleteMapping("")
+    public R removeVideoList(
+            @ApiParam(name = "videoIdList",
+                      value = "视频ID列表",
+                      required = true)
+            @RequestParam("videoIdList")
+                    List<String> videoIdList) {
+        vodService.removeVideoList(videoIdList);
         return R.ok()
                 .message("视频删除成功");
     }

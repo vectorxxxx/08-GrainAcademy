@@ -37,7 +37,7 @@ public class GlobalExceptionHandler
     @ExceptionHandler(GuliException.class)
     @ResponseBody
     public R error(GuliException e) {
-        log.error(e.getMessage(), e);
+        log.error(e.getMsg());
         return R.error()
                 .code(e.getCode())
                 .message(e.getMsg());
