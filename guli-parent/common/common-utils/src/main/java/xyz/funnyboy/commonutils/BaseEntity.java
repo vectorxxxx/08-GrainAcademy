@@ -1,4 +1,4 @@
-package xyz.funnyboy.eduservice.entity.base;
+package xyz.funnyboy.commonutils;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

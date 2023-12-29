@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import xyz.funnyboy.eduservice.entity.base.BaseEntity;
+import xyz.funnyboy.commonutils.BaseEntity;
 
 import java.math.BigDecimal;
 
