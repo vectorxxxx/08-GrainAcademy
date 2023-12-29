@@ -13,7 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "axios": "^1.6.3",
+    "axios": "^0.18.0",
     "nuxt": "^2.0.0",
     "vue-awesome-swiper": "^2.6.7"
   },
