@@ -22,3 +22,19 @@ if (process.env.NODE_ENV === "development") {
 `process.env` 对象中还有其他环境变量,例如 `BASE_URL` 和 `API_URL`,这些变量可以用于配置应用程序的 URL。
 
 请注意,`process.env` 对象在 Vue.js 组件中是全局的,这意味着您可以在组件的任意位置使用它,而不需要使用 `this` 引用。
+
+### 3、一些命令
+
+```shell
+# nvm
+nvm list
+nvm install [version]
+nvm use [version]
+
+# npm
+npm get registry
+npm config set registry https://registry.npmmirror.com
+npm install
+npm run dev
+```
+
