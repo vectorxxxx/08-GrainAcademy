@@ -40,6 +40,7 @@
         <vod20170321.version>2.18.1</vod20170321.version>
         <tea-openapi.version>0.3.1</tea-openapi.version>
         <tea-util.version>0.2.21</tea-util.version>
+        <dysmsapi20170525.version>2.0.24</dysmsapi20170525.version>
         <fastjson.version>1.2.28</fastjson.version>
         <gson.version>2.10.1</gson.version>
         <json.version>20170516</json.version>
@@ -152,6 +153,16 @@
                 <artifactId>aliyun-java-sdk-core</artifactId>
                 <version>${aliyun-java-sdk-core.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>tea-openapi</artifactId>
+                <version>${tea-openapi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.aliyun</groupId>
+                <artifactId>tea-util</artifactId>
+                <version>${tea-util.version}</version>
+            </dependency>
             <!-- OSS 对象存储服务 -->
             <dependency>
                 <groupId>com.aliyun.oss</groupId>
@@ -166,11 +177,6 @@
             </dependency>
             <dependency>
                 <groupId>com.aliyun</groupId>
-                <artifactId>aliyun-java-vod-upload</artifactId>
-                <version>${aliyun-java-vod-upload.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.aliyun</groupId>
                 <artifactId>aliyun-sdk-vod-upload</artifactId>
                 <version>${aliyun-sdk-vod-upload.version}</version>
             </dependency>
@@ -179,15 +185,11 @@
                 <artifactId>vod20170321</artifactId>
                 <version>${vod20170321.version}</version>
             </dependency>
+            <!-- SMS 短信服务 -->
             <dependency>
                 <groupId>com.aliyun</groupId>
-                <artifactId>tea-openapi</artifactId>
-                <version>${tea-openapi.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.aliyun</groupId>
-                <artifactId>tea-util</artifactId>
-                <version>${tea-util.version}</version>
+                <artifactId>dysmsapi20170525</artifactId>
+                <version>${dysmsapi20170525.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>

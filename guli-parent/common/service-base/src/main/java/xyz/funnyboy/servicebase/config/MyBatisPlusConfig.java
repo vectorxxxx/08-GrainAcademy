@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @Configuration
 @EnableTransactionManagement
-@MapperScan({"xyz.funnyboy.eduservice.mapper", "xyz.funnyboy.educms.mapper"})
+@MapperScan({"xyz.funnyboy.eduservice.mapper", "xyz.funnyboy.educms.mapper", "xyz.funnyboy.ucenterservice.mapper"})
 public class MyBatisPlusConfig
 {
     /**
