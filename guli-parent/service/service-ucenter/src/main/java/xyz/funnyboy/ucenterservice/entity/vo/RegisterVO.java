@@ -17,7 +17,7 @@ import lombok.Data;
 public class RegisterVO
 {
     @ApiModelProperty(value = "昵称")
-    private String nicknme;
+    private String nickname;
 
     @ApiModelProperty(value = "手机号")
     private String mobile;

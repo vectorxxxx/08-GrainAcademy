@@ -40,7 +40,7 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
      */
     @Override
     public void register(RegisterVO registerVO) {
-        final String nicknme = registerVO.getNicknme();
+        final String nicknme = registerVO.getNickname();
         if (StringUtils.isEmpty(nicknme)) {
             throw new GuliException(ResultCode.ERROR, "昵称不能为空");
         }
