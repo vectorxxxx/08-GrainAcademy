@@ -127,4 +127,15 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
         BeanUtils.copyProperties(member, userInfoVO);
         return userInfoVO;
     }
+
+    /**
+     * 根据OpenID获取会员信息
+     *
+     * @param openid openid
+     * @return {@link UcenterMember}
+     */
+    @Override
+    public UcenterMember getOpenIdMember(String openid) {
+        return this.getOne(new LambdaQueryWrapper<UcenterMember>().eq(UcenterMember::getOpenid, openid));
+    }
 }

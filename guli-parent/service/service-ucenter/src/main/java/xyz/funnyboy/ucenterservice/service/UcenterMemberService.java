@@ -39,4 +39,12 @@ public interface UcenterMemberService extends IService<UcenterMember>
      * @return {@link LoginVO}
      */
     UserInfoVO getLoginInfo(String memberId);
+
+    /**
+     * 根据OpenID获取会员信息
+     *
+     * @param openid openid
+     * @return {@link UcenterMember}
+     */
+    UcenterMember getOpenIdMember(String openid);
 }

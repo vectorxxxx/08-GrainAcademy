@@ -136,6 +136,7 @@ import '~/assets/css/global.css'
 import '~/assets/css/web.css'
 
 import cookie from 'js-cookie'
+import loginApi from '@/api/login'
 
 export default {
   data() {
@@ -152,6 +153,11 @@ export default {
     }
   },
   created() {
+    this.token = this.$route.query.token
+    if (this.token) {
+      this.wxLogin()
+    }
+
     this.showInfo()
   },
   methods: {
@@ -160,15 +166,26 @@ export default {
       const userStr = cookie.get('guli_ucenter')
       if (userStr) {
         this.loginInfo = JSON.parse(userStr)
-        console.log(this.loginInfo)
       }
     },
     // 退出
     logout() {
       // 清空cookie值
       cookie.set('guli_ucenter', '', { domain: 'localhost' })
+      cookie.set('guli_token', '', { domain: 'localhost' })
       // 回到首页
       window.location.href = '/'
+    },
+    // 微信登录
+    wxLogin() {
+      // token 存入 cookie
+      cookie.set('guli_token', this.token, { domain: 'localhost' })
+      cookie.set('guli_ucenter', '', { domain: 'localhost' })
+      // 根据 token 获取会员信息
+      loginApi.getInfo().then(response => {
+        this.loginInfo = response.data.data.userInfo
+        cookie.set('guli_ucenter', JSON.stringify(this.loginInfo), { domain: 'localhost' })
+      })
     }
   }
 }
