@@ -20,6 +20,9 @@ import xyz.funnyboy.eduservice.service.EduCourseService;
 import xyz.funnyboy.eduservice.service.EduVideoService;
 import xyz.funnyboy.servicebase.exception.GuliException;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * <p>
  * 课程 服务实现类
@@ -210,5 +213,26 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
 
         // 按 ID 删除课程
         this.removeById(courseId);
+    }
+
+    /**
+     * 按教师 ID 查询课程
+     *
+     * @param teacherId 教师 ID
+     * @return {@link List}<{@link CourseInfoVO}>
+     */
+    @Override
+    public List<CourseInfoVO> selectByTeacherId(String teacherId) {
+        final LambdaQueryWrapper<EduCourse> queryWrapper = new LambdaQueryWrapper<EduCourse>().eq(EduCourse::getTeacherId, teacherId)
+                                                                                              .orderByDesc(EduCourse::getGmtModified);
+        final List<EduCourse> courseList = this.list(queryWrapper);
+
+        return courseList.stream()
+                         .map(eduCourse -> {
+                             CourseInfoVO courseInfoVO = new CourseInfoVO();
+                             BeanUtils.copyProperties(eduCourse, courseInfoVO);
+                             return courseInfoVO;
+                         })
+                         .collect(Collectors.toList());
     }
 }

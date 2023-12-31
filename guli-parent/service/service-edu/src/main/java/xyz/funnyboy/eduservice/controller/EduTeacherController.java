@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.funnyboy.commonutils.R;
 import xyz.funnyboy.eduservice.entity.EduTeacher;
+import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
 import xyz.funnyboy.eduservice.entity.vo.EduTeacherQuery;
+import xyz.funnyboy.eduservice.service.EduCourseService;
 import xyz.funnyboy.eduservice.service.EduTeacherService;
 
 import java.util.List;
@@ -31,6 +33,9 @@ public class EduTeacherController
     @Autowired
     private EduTeacherService eduTeacherService;
 
+    @Autowired
+    private EduCourseService eduCourseService;
+
     @ApiOperation(value = "所有讲师列表")
     @GetMapping
     public R list() {
@@ -48,6 +53,9 @@ public class EduTeacherController
     @ApiOperation(value = "根据ID删除讲师")
     @DeleteMapping("{id}")
     public R removeById(
+            @ApiParam(name = "id",
+                      value = "讲师ID",
+                      required = true)
             @PathVariable
                     String id) {
         final boolean remove = eduTeacherService.removeById(id);
@@ -81,10 +89,18 @@ public class EduTeacherController
         eduTeacherService.pageQuery(pageParam, teacherQuery);
 
         final long total = pageParam.getTotal();
+        final long current = pageParam.getCurrent();
+        final boolean hasPrevious = pageParam.hasPrevious();
+        final boolean hasNext = pageParam.hasNext();
+        final long pages = pageParam.getPages();
         final List<EduTeacher> records = pageParam.getRecords();
 
         return R.ok()
                 .data("total", total)
+                .data("current", current)
+                .data("hasPrevious", hasPrevious)
+                .data("hasNext", hasNext)
+                .data("pages", pages)
                 .data("rows", records);
     }
 
@@ -103,16 +119,28 @@ public class EduTeacherController
     @ApiOperation(value = "根据ID查询讲师")
     @GetMapping("{id}")
     public R getById(
+            @ApiParam(name = "id",
+                      value = "讲师ID",
+                      required = true)
             @PathVariable
                     String id) {
+        // 查询讲师
         final EduTeacher eduTeacher = eduTeacherService.getById(id);
+
+        // 查询课程
+        final List<CourseInfoVO> courseInfoVOList = eduCourseService.selectByTeacherId(id);
+
         return R.ok()
-                .data("item", eduTeacher);
+                .data("item", eduTeacher)
+                .data("courseList", courseInfoVOList);
     }
 
     @ApiOperation(value = "根据ID修改讲师")
     @PutMapping("{id}")
     public R updateById(
+            @ApiParam(name = "id",
+                      value = "讲师ID",
+                      required = true)
             @PathVariable
             final String id,
 
@@ -121,6 +149,7 @@ public class EduTeacherController
                       required = true)
             @RequestBody
                     EduTeacher eduTeacher) {
+        eduTeacher.setId(id);
         eduTeacherService.updateById(eduTeacher);
         return R.ok();
     }

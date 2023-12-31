@@ -7,6 +7,8 @@ import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
 import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
 import xyz.funnyboy.eduservice.entity.vo.CourseQuery;
 
+import java.util.List;
+
 /**
  * <p>
  * 课程 服务类
@@ -70,4 +72,12 @@ public interface EduCourseService extends IService<EduCourse>
      * @param courseId 课程编号
      */
     void removeCourseById(String courseId);
+
+    /**
+     * 按教师 ID 查询课程
+     *
+     * @param teacherId 教师 ID
+     * @return {@link List}<{@link CourseInfoVO}>
+     */
+    List<CourseInfoVO> selectByTeacherId(String teacherId);
 }
