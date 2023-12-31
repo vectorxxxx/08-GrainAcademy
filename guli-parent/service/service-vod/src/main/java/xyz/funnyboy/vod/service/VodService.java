@@ -35,4 +35,12 @@ public interface VodService
      * @param videoIdList 视频 ID 列表
      */
     void removeVideoList(List<String> videoIdList);
+
+    /**
+     * 获取播放凭证
+     *
+     * @param videoId 视频 ID
+     * @return {@link String}
+     */
+    String getPlayAuth(String videoId) throws Exception;
 }

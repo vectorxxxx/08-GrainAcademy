@@ -9,10 +9,11 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import xyz.funnyboy.commonutils.R;
 import xyz.funnyboy.eduservice.entity.EduCourse;
-import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
-import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
-import xyz.funnyboy.eduservice.entity.vo.CourseQuery;
+import xyz.funnyboy.eduservice.entity.vo.*;
+import xyz.funnyboy.eduservice.service.EduChapterService;
 import xyz.funnyboy.eduservice.service.EduCourseService;
+
+import java.util.List;
 
 /**
  * <p>
@@ -30,6 +31,9 @@ public class EduCourseController
 {
     @Autowired
     private EduCourseService eduCourseService;
+
+    @Autowired
+    private EduChapterService eduChapterService;
 
     @ApiOperation(value = "新增课程")
     @PostMapping("addCourseInfo")
@@ -120,11 +124,16 @@ public class EduCourseController
                       value = "查询条件",
                       required = false)
             @RequestBody
-                    CourseQuery courseQuery) {
+                    CourseQueryVO courseQueryVO) {
         final Page<EduCourse> pageParam = new Page<>(page, limit);
-        eduCourseService.pageQuery(pageParam, courseQuery);
+        eduCourseService.pageQuery(pageParam, courseQueryVO);
         return R.ok()
                 .data("total", pageParam.getTotal())
+                .data("current", pageParam.getCurrent())
+                .data("pages", pageParam.getPages())
+                .data("size", pageParam.getSize())
+                .data("hasPrevious", pageParam.hasPrevious())
+                .data("hasNext", pageParam.hasNext())
                 .data("rows", pageParam.getRecords());
     }
 
@@ -138,6 +147,23 @@ public class EduCourseController
                     String courseId) {
         eduCourseService.removeCourseById(courseId);
         return R.ok();
+    }
+
+    @ApiOperation(value = "根据id查询课程相关信息")
+    @GetMapping("{courseId}")
+    public R getCourseInfoWeb(
+            @ApiParam(name = "courseId",
+                      value = "课程id",
+                      required = true)
+            @PathVariable
+                    String courseId) {
+        // 课程（包含讲师、分类等相关信息）
+        final CourseWebVO courseWebVO = eduCourseService.selectInfoWebById(courseId);
+        // 查询课程章节信息
+        final List<ChapterVO> chapterVOList = eduChapterService.getChapterVideo(courseId);
+        return R.ok()
+                .data("course", courseWebVO)
+                .data("chapterVOList", chapterVOList);
     }
 }
 

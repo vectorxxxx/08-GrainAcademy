@@ -14,7 +14,7 @@ import lombok.Data;
 @ApiModel(value = "课程查询对象",
           description = "课程查询对象")
 @Data
-public class CourseQuery
+public class CourseQueryVO
 {
     @ApiModelProperty(value = "课程标题")
     private String title;
@@ -26,5 +26,14 @@ public class CourseQuery
     private String subjectParentId;
 
     @ApiModelProperty(value = "二级类别ID")
-    private String sujectId;
+    private String subjectId;
+
+    @ApiModelProperty(value = "销量排序")
+    private String buyCountSort;
+
+    @ApiModelProperty(value = "最新时间排序")
+    private String gmtCreateSort;
+
+    @ApiModelProperty(value = "价格排序")
+    private String priceSort;
 }

@@ -53,5 +53,8 @@ module.exports = {
   ],
   css: [
     'swiper/dist/css/swiper.css'
+  ],
+  script: [
+    {src: 'https://g.alicdn.com/apsara-media-box/imp-web-player/2.19.0/aliplayer-min.js', type: 'text/javascript'}
   ]
 }

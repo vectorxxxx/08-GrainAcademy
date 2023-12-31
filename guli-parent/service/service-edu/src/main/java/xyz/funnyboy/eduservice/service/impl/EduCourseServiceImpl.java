@@ -12,7 +12,8 @@ import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.EduCourseDescription;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
 import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
-import xyz.funnyboy.eduservice.entity.vo.CourseQuery;
+import xyz.funnyboy.eduservice.entity.vo.CourseQueryVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseWebVO;
 import xyz.funnyboy.eduservice.mapper.EduCourseMapper;
 import xyz.funnyboy.eduservice.service.EduChapterService;
 import xyz.funnyboy.eduservice.service.EduCourseDescriptionService;
@@ -156,40 +157,54 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     /**
      * 分页查询课程信息
      *
-     * @param pageParam   页面参数
-     * @param courseQuery 查询条件
+     * @param pageParam     页面参数
+     * @param courseQueryVO 查询条件
      */
     @Override
-    public void pageQuery(Page<EduCourse> pageParam, CourseQuery courseQuery) {
+    public void pageQuery(Page<EduCourse> pageParam, CourseQueryVO courseQueryVO) {
         final LambdaQueryWrapper<EduCourse> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.orderByAsc(EduCourse::getGmtCreate);
-        if (courseQuery == null) {
+        if (courseQueryVO == null) {
             this.page(pageParam, queryWrapper);
             return;
         }
 
         // 课程标题
-        final String title = courseQuery.getTitle();
+        final String title = courseQueryVO.getTitle();
         if (!StringUtils.isEmpty(title)) {
             queryWrapper.like(EduCourse::getTitle, title);
         }
 
         // 讲师ID
-        final String teacherId = courseQuery.getTeacherId();
+        final String teacherId = courseQueryVO.getTeacherId();
         if (!StringUtils.isEmpty(teacherId)) {
             queryWrapper.eq(EduCourse::getTeacherId, teacherId);
         }
 
         // 一级类别ID
-        final String subjectParentId = courseQuery.getSubjectParentId();
+        final String subjectParentId = courseQueryVO.getSubjectParentId();
         if (!StringUtils.isEmpty(subjectParentId)) {
             queryWrapper.eq(EduCourse::getSubjectParentId, subjectParentId);
         }
 
         // 二级类别ID
-        final String sujectId = courseQuery.getSujectId();
+        final String sujectId = courseQueryVO.getSubjectId();
         if (!StringUtils.isEmpty(sujectId)) {
             queryWrapper.eq(EduCourse::getSubjectId, sujectId);
+        }
+
+        // 销售数量排序
+        if (!StringUtils.isEmpty(courseQueryVO.getBuyCountSort())) {
+            queryWrapper.orderByDesc(EduCourse::getBuyCount);
+        }
+
+        // 销售数量排序
+        if (!StringUtils.isEmpty(courseQueryVO.getGmtCreateSort())) {
+            queryWrapper.orderByDesc(EduCourse::getGmtCreate);
+        }
+
+        // 价格排序
+        if (!StringUtils.isEmpty(courseQueryVO.getPriceSort())) {
+            queryWrapper.orderByDesc(EduCourse::getPrice);
         }
 
         this.page(pageParam, queryWrapper);
@@ -234,5 +249,30 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
                              return courseInfoVO;
                          })
                          .collect(Collectors.toList());
+    }
+
+    /**
+     * 根据课程ID查询课程相关信息
+     *
+     * @param courseId 课程编号
+     * @return {@link CourseWebVO}
+     */
+    @Override
+    public CourseWebVO selectInfoWebById(String courseId) {
+        // 更新课程浏览次数
+        this.updatePageViewCount(courseId);
+        return baseMapper.selectInfoWebById(courseId);
+    }
+
+    /**
+     * 更新课程浏览次数
+     *
+     * @param courseId 课程编号
+     */
+    @Override
+    public void updatePageViewCount(String courseId) {
+        EduCourse course = this.getById(courseId);
+        course.setViewCount(course.getViewCount() + 1);
+        this.updateById(course);
     }
 }

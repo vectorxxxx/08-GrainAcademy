@@ -5,7 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
 import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
-import xyz.funnyboy.eduservice.entity.vo.CourseQuery;
+import xyz.funnyboy.eduservice.entity.vo.CourseQueryVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseWebVO;
 
 import java.util.List;
 
@@ -61,10 +62,10 @@ public interface EduCourseService extends IService<EduCourse>
     /**
      * 页面查询 分页查询课程信息
      *
-     * @param pageParam   页面参数
-     * @param courseQuery 查询条件
+     * @param pageParam     页面参数
+     * @param courseQueryVO 查询条件
      */
-    void pageQuery(Page<EduCourse> pageParam, CourseQuery courseQuery);
+    void pageQuery(Page<EduCourse> pageParam, CourseQueryVO courseQueryVO);
 
     /**
      * 按 ID 删除课程
@@ -80,4 +81,19 @@ public interface EduCourseService extends IService<EduCourse>
      * @return {@link List}<{@link CourseInfoVO}>
      */
     List<CourseInfoVO> selectByTeacherId(String teacherId);
+
+    /**
+     * 根据课程ID查询课程相关信息
+     *
+     * @param courseId 课程编号
+     * @return {@link CourseWebVO}
+     */
+    CourseWebVO selectInfoWebById(String courseId);
+
+    /**
+     * 更新课程浏览次数
+     *
+     * @param courseId 课程编号
+     */
+    void updatePageViewCount(String courseId);
 }

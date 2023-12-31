@@ -65,4 +65,18 @@ public class VodController
         return R.ok()
                 .message("视频删除成功");
     }
+
+    @ApiOperation(value = "获取视频播放凭证")
+    @GetMapping("getPlayAuth/{videoId}")
+    public R getPlayAuth(
+            @ApiParam(name = "videoId",
+                      value = "视频ID",
+                      required = true)
+            @PathVariable
+                    String videoId) throws Exception {
+        final String playAuth = vodService.getPlayAuth(videoId);
+        return R.ok()
+                .message("获取凭证成功")
+                .data("playAuth", playAuth);
+    }
 }

@@ -1,11 +1,14 @@
 package xyz.funnyboy.vod.service.impl;
 
+import com.aliyun.teautil.models.RuntimeOptions;
 import com.aliyun.vod.upload.impl.UploadVideoImpl;
 import com.aliyun.vod.upload.req.UploadStreamRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyun.vod20170321.Client;
 import com.aliyun.vod20170321.models.DeleteVideoRequest;
 import com.aliyun.vod20170321.models.DeleteVideoResponse;
+import com.aliyun.vod20170321.models.GetVideoPlayAuthRequest;
+import com.aliyun.vod20170321.models.GetVideoPlayAuthResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -100,5 +103,21 @@ public class VodServiceImpl implements VodService
     public void removeVideoList(List<String> videoIdList) {
         final String videoIds = org.apache.commons.lang.StringUtils.join(videoIdList.toArray(), ",");
         removeVideo(videoIds);
+    }
+
+    /**
+     * 获取播放凭证
+     *
+     * @param videoId 视频 ID
+     * @return {@link String}
+     */
+    @Override
+    public String getPlayAuth(String videoId) throws Exception {
+        final Client client = AliyunVodSDKUtils.createClient(ConstantPropertiesUtil.ACCESS_KEY_ID, ConstantPropertiesUtil.ACCESS_KEY_SECRET);
+        final GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+        request.setVideoId(videoId);
+        final GetVideoPlayAuthResponse response = client.getVideoPlayAuthWithOptions(request, new RuntimeOptions());
+        return response.getBody()
+                       .getPlayAuth();
     }
 }

@@ -1,8 +1,10 @@
 package xyz.funnyboy.eduservice.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.apache.ibatis.annotations.Param;
 import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseWebVO;
 
 /**
  * <p>
@@ -20,5 +22,17 @@ public interface EduCourseMapper extends BaseMapper<EduCourse>
      * @param courseId 编号
      * @return {@link CoursePublishVO}
      */
-    CoursePublishVO selectCoursePublishVOById(String courseId);
+    CoursePublishVO selectCoursePublishVOById(
+            @Param("courseId")
+                    String courseId);
+
+    /**
+     * 根据课程ID查询课程相关信息
+     *
+     * @param courseId 课程编号
+     * @return {@link CourseWebVO}
+     */
+    CourseWebVO selectInfoWebById(
+            @Param("courseId")
+                    String courseId);
 }
