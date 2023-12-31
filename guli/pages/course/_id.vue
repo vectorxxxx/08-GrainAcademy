@@ -127,7 +127,8 @@
                                 <a
                                   :class="{'current-2': index !== 0 }"
                                   :href="'/player/'+video.videoSourceId"
-                                  :title="video.title">
+                                  :title="video.title"
+                                  target="_blank">
                                   <span v-if="video.free" class="fr">
                                     <i class="free-icon vam mr10">免费试听</i>
                                   </span>
@@ -180,21 +181,157 @@
       </div>
     </section>
     <!-- /课程详情 结束 -->
+
+    <!--  评论 开始  -->
+    <div class="mt50 commentHtml">
+      <h6 id="i-art-comment" class="c-c-content c-infor-title">
+        <span class="commentTitle">课程评论</span>
+      </h6>
+      <section class="lh-bj-list pr mt20 replyhtml">
+        <ul>
+          <li class="unBr">
+            <aside class="noter-pic">
+              <img width="50" height="50" class="picImg" src="~/assets/img/avatar-boy.gif">
+            </aside>
+            <div class="of">
+              <section class="n-reply-wrap">
+                <fieldset>
+                  <textarea id="commentContent" v-model="comment.content" name="" placeholder="输入您要评论的文字"/>
+                </fieldset>
+                <p class="of mt5 tar pl10 pr10">
+                  <span class="fl "><tt class="c-red commentContentmeg" style="display: none;"/></span>
+                  <input type="button" value="回复" class="lh-reply-btn" @click="addComment()">
+                </p>
+              </section>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <section class="">
+        <section class="question-list lh-bj-list pr">
+          <ul class="pr10">
+            <li v-for="(comment,index) in data.items" :key="index">
+              <aside class="noter-pic">
+                <img :src="comment.avatar" width="50" height="50" class="picImg">
+              </aside>
+              <div class="of">
+                <span class="fl">
+                  <font class="fsize12 c-blue">
+                    {{ comment.nickname }}</font>
+                <font class="fsize12 c-999 ml5">评论：</font></span>
+              </div>
+              <div class="noter-txt mt5">
+                <p>{{ comment.content }}</p>
+              </div>
+              <div class="of mt5">
+                <span class="fr"><font class="fsize12 c-999 ml5">{{ comment.gmtCreate }}</font></span>
+              </div>
+            </li>
+          </ul>
+        </section>
+      </section>
+
+      <!-- 公共分页 开始 -->
+      <div class="paging">
+        <!-- undisable这个class是否存在，取决于数据属性hasPrevious -->
+        <a
+          :class="{undisable: !data.hasPrevious}"
+          href="#"
+          title="首页"
+          @click.prevent="gotoPage(1)">首</a>
+        <a
+          :class="{undisable: !data.hasPrevious}"
+          href="#"
+          title="前一页"
+          @click.prevent="gotoPage(data.current-1)">&lt;</a>
+        <a
+          v-for="page in data.pages"
+          :key="page"
+          :class="{current: data.current == page, undisable: data.current == page}"
+          :title="'第'+page+'页'"
+          href="#"
+          @click.prevent="gotoPage(page)">{{ page }}</a>
+        <a
+          :class="{undisable: !data.hasNext}"
+          href="#"
+          title="后一页"
+          @click.prevent="gotoPage(data.current+1)">&gt;</a>
+        <a
+          :class="{undisable: !data.hasNext}"
+          href="#"
+          title="末页"
+          @click.prevent="gotoPage(data.pages)">末</a>
+        <div class="clear"/>
+      </div>
+      <!-- 公共分页 结束 -->
+
+    </div>
+    <!--  评论 结束  -->
+
   </div>
 </template>
 
 <script>
 import course from '@/api/course'
+import comment from '@/api/comment'
 
 export default {
   asyncData({ params, error }) {
     return course.getById(params.id).then(response => {
-      console.log(response.data.data)
       return {
+        courseId: params.id,
         course: response.data.data.course,
         chapterVOList: response.data.data.chapterVOList
       }
     })
+  },
+
+  data() {
+    return {
+      data: {},
+      page: 1,
+      limit: 4,
+      total: 10,
+      comment: {
+        courseId: '',
+        teacherId: '',
+        content: '',
+        gmtCreate: ''
+      }
+    }
+  },
+
+  created() {
+    this.initComment()
+  },
+
+  methods: {
+    initComment() {
+      comment.getPageList(this.page, this.limit, this.courseId).then(response => {
+        this.data = response.data.data
+      })
+    },
+    addComment() {
+      console.log(this.courseId)
+      this.comment.courseId = this.courseId
+      this.comment.teacherId = this.course.teacherId
+      comment.addComment(this.comment).then(response => {
+        if (response.data.success) {
+          this.comment.content = ''
+          this.initComment()
+        }
+      })
+    },
+    gotoPage(page) {
+      comment.getPageList(page, this.limit, this.courseId).then(response => {
+        this.data = response.data.data
+      }).catch(response => {
+        this.$message({
+          type: 'error',
+          message: response.message
+        })
+      })
+    }
   }
 }
 </script>

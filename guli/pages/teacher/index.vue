@@ -92,7 +92,6 @@ const limit = 8
 export default {
   asyncData({ params, error }) {
     return teacher.getPageList(1, limit).then(response => {
-      console.log(response.data.data)
       return { data: response.data.data }
     })
   },

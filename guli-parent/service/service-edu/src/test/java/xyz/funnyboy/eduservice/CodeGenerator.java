@@ -69,8 +69,9 @@ public class CodeGenerator
         // sc.setInclude("edu_subject");
         // sc.setInclude("edu_course");
         // sc.setInclude("edu_course_description");
-        sc.setInclude("edu_chapter");
+        // sc.setInclude("edu_chapter");
         // sc.setInclude("edu_video");
+        sc.setInclude("edu_comment");
         // 数据库表映射到实体的命名策略
         sc.setNaming(NamingStrategy.underline_to_camel);
         // 生成实体时去掉表前缀
