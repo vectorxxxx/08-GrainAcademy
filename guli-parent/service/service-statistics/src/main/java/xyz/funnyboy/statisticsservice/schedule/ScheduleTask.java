@@ -24,10 +24,10 @@ public class ScheduleTask
     /**
      * 每隔5秒执行一次，0秒开始
      */
-    @Scheduled(cron = "0/5 * * * * ?")
-    public void test() {
-        System.out.println("**************task1执行了..");
-    }
+    // @Scheduled(cron = "0/5 * * * * ?")
+    // public void test() {
+    //     System.out.println("**************task1执行了..");
+    // }
 
     /**
      * 每天凌晨一点，对前一天的数据进行统计

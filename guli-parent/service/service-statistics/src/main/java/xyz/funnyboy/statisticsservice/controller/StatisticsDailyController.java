@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import xyz.funnyboy.commonutils.R;
 import xyz.funnyboy.statisticsservice.service.StatisticsDailyService;
 
+import java.util.Map;
+
 /**
  * <p>
  * 统计分析管理
@@ -19,7 +21,7 @@ import xyz.funnyboy.statisticsservice.service.StatisticsDailyService;
 @Api(description = "统计分析管理")
 @CrossOrigin
 @RestController
-@RequestMapping("/statisticsservice/statistics-daily")
+@RequestMapping("/statisticsservice/statistics")
 public class StatisticsDailyController
 {
     @Autowired
@@ -35,6 +37,31 @@ public class StatisticsDailyController
                     String day) {
         statisticsDailyService.createStatisticsByDay(day);
         return R.ok();
+    }
+
+    @ApiOperation(value = "显示图表")
+    @GetMapping("/showChart/{type}/{begin}/{end}")
+    public R showChart(
+            @ApiParam(name = "type",
+                      value = "统计类型",
+                      required = true)
+            @PathVariable("type")
+                    String type,
+
+            @ApiParam(name = "begin",
+                      value = "开始日期",
+                      required = true)
+            @PathVariable("begin")
+                    String begin,
+
+            @ApiParam(name = "end",
+                      value = "结束日期",
+                      required = true)
+            @PathVariable("end")
+                    String end) {
+        final Map<String, Object> chart = statisticsDailyService.showChart(type, begin, end);
+        return R.ok()
+                .data(chart);
     }
 }
 
