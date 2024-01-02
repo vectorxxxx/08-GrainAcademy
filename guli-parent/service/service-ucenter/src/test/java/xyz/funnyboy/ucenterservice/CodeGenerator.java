@@ -78,6 +78,8 @@ public class CodeGenerator
         sc.setRestControllerStyle(true);
         // url中驼峰转连字符
         sc.setControllerMappingHyphenStyle(true);
+        // 设置逻辑删除字段
+        sc.setLogicDeleteFieldName("is_deleted");
         mpg.setStrategy(sc);
 
         // 6、执行

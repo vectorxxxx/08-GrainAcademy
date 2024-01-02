@@ -29,7 +29,7 @@ public class CodeGenerator
         final String property = System.getProperty("user.dir");
         System.out.println(property);
         gc.setOutputDir(property + "/src/main/java");
-        gc.setAuthor("vectorx");
+        gc.setAuthor("VectorX");
         // 生成后是否打开资源管理器
         gc.setOpen(false);
         // 重新生成时文件是否覆盖FF
@@ -37,7 +37,7 @@ public class CodeGenerator
         // 去掉Service接口的首字母I
         gc.setServiceName("%sService");
         // 主键策略
-        gc.setIdType(IdType.ID_WORKER);
+        gc.setIdType(IdType.ID_WORKER_STR);
         // 定义生成的实体类中日期类型
         gc.setDateType(DateType.ONLY_DATE);
         // 开启 Swagger2 模式
@@ -84,6 +84,8 @@ public class CodeGenerator
         sc.setRestControllerStyle(true);
         // url中驼峰转连字符
         sc.setControllerMappingHyphenStyle(true);
+        // 设置逻辑删除字段
+        sc.setLogicDeleteFieldName("is_deleted");
         mpg.setStrategy(sc);
 
         // 6、执行

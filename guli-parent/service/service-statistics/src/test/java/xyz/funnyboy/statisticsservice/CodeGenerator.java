@@ -1,4 +1,4 @@
-package xyz.funnyboy.educms;
+package xyz.funnyboy.statisticsservice;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -55,7 +55,7 @@ public class CodeGenerator
 
         // 4、包配置
         final PackageConfig pc = new PackageConfig();
-        pc.setModuleName("cmsservice");
+        pc.setModuleName("statisticsservice");
         pc.setParent("xyz.funnyboy");
         pc.setController("controller");
         pc.setEntity("entity");
@@ -65,7 +65,7 @@ public class CodeGenerator
 
         // 5、策略配置
         final StrategyConfig sc = new StrategyConfig();
-        sc.setInclude("crm_banner");
+        sc.setInclude("statistics_daily");
         // 数据库表映射到实体的命名策略
         sc.setNaming(NamingStrategy.underline_to_camel);
         // 生成实体时去掉表前缀

@@ -98,5 +98,18 @@ public class UcenterMemberController
         BeanUtils.copyProperties(member, userInfoVO);
         return userInfoVO;
     }
+
+    @ApiOperation(value = "统计某一天的注册人数")
+    @GetMapping("/countRegister/remote/{day}")
+    public R countRegister(
+            @ApiParam(name = "day",
+                      value = "日期",
+                      required = true)
+            @PathVariable("day")
+                    String day) {
+        final int countRegister = memberService.countRegister(day);
+        return R.ok()
+                .data("countRegister", countRegister);
+    }
 }
 

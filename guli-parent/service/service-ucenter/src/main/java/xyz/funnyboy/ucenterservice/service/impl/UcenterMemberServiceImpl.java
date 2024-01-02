@@ -138,4 +138,15 @@ public class UcenterMemberServiceImpl extends ServiceImpl<UcenterMemberMapper, U
     public UcenterMember getOpenIdMember(String openid) {
         return this.getOne(new LambdaQueryWrapper<UcenterMember>().eq(UcenterMember::getOpenid, openid));
     }
+
+    /**
+     * 统计某一天的注册人数
+     *
+     * @param day 日期
+     * @return int
+     */
+    @Override
+    public int countRegister(String day) {
+        return baseMapper.selectRegisterCount(day);
+    }
 }

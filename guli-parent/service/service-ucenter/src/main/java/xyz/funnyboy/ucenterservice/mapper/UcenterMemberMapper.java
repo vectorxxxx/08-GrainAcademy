@@ -1,7 +1,7 @@
 package xyz.funnyboy.ucenterservice.mapper;
 
-import xyz.funnyboy.ucenterservice.entity.UcenterMember;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import xyz.funnyboy.ucenterservice.entity.UcenterMember;
 
 /**
  * <p>
@@ -11,6 +11,14 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author VectorX
  * @since 2023-12-30
  */
-public interface UcenterMemberMapper extends BaseMapper<UcenterMember> {
+public interface UcenterMemberMapper extends BaseMapper<UcenterMember>
+{
 
+    /**
+     * 查询某天的注册人数
+     *
+     * @param day 日期
+     * @return int
+     */
+    int selectRegisterCount(String day);
 }
