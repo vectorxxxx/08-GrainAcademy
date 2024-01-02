@@ -42,7 +42,7 @@
               </span>
             </section>
             <section class="c-attr-mt">
-              <a href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+              <a href="#" title="立即购买" class="comm-btn c-btn-3" @click="createOrder()">立即购买</a>
             </section>
           </section>
         </aside>
@@ -274,6 +274,7 @@
 <script>
 import course from '@/api/course'
 import comment from '@/api/comment'
+import order from '@/api/order'
 
 export default {
   asyncData({ params, error }) {
@@ -306,11 +307,13 @@ export default {
   },
 
   methods: {
+    // 初始化评论详情
     initComment() {
       comment.getPageList(this.page, this.limit, this.courseId).then(response => {
         this.data = response.data.data
       })
     },
+    // 添加评论
     addComment() {
       console.log(this.courseId)
       this.comment.courseId = this.courseId
@@ -322,6 +325,7 @@ export default {
         }
       })
     },
+    // 跳转页面
     gotoPage(page) {
       comment.getPageList(page, this.limit, this.courseId).then(response => {
         this.data = response.data.data
@@ -330,6 +334,13 @@ export default {
           type: 'error',
           message: response.message
         })
+      })
+    },
+    // 生成订单
+    createOrder() {
+      order.createOrder(this.courseId).then(response => {
+        // 跳转订单详情页面
+        this.$router.push({ path: '/order/' + response.data.data.orderNo })
       })
     }
   }
