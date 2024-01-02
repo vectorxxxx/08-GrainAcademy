@@ -2,8 +2,8 @@ package xyz.funnyboy.eduservice.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;
+import xyz.funnyboy.commonutils.vo.CoursePublishVO;
 import xyz.funnyboy.eduservice.entity.EduCourse;
-import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
 import xyz.funnyboy.eduservice.entity.vo.CourseWebVO;
 
 /**

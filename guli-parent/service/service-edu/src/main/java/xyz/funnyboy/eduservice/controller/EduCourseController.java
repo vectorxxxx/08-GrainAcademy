@@ -8,8 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import xyz.funnyboy.commonutils.R;
+import xyz.funnyboy.commonutils.vo.CoursePublishVO;
 import xyz.funnyboy.eduservice.entity.EduCourse;
-import xyz.funnyboy.eduservice.entity.vo.*;
+import xyz.funnyboy.eduservice.entity.vo.ChapterVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseQueryVO;
+import xyz.funnyboy.eduservice.entity.vo.CourseWebVO;
 import xyz.funnyboy.eduservice.service.EduChapterService;
 import xyz.funnyboy.eduservice.service.EduCourseService;
 
@@ -164,6 +168,17 @@ public class EduCourseController
         return R.ok()
                 .data("course", courseWebVO)
                 .data("chapterVOList", chapterVOList);
+    }
+
+    @ApiOperation(value = "根据课程id查询课程基本信息")
+    @GetMapping("getCourseInfo/remote/{courseId}")
+    public CoursePublishVO getCourseInfoRemote(
+            @ApiParam(name = "courseId",
+                      value = "课程id",
+                      required = true)
+            @PathVariable("courseId")
+                    String courseId) {
+        return eduCourseService.getCoursePublishVOById(courseId);
     }
 }
 

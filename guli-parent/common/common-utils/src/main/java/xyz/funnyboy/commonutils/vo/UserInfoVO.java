@@ -1,4 +1,4 @@
-package xyz.funnyboy.ucenterservice.entity.vo;
+package xyz.funnyboy.commonutils.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

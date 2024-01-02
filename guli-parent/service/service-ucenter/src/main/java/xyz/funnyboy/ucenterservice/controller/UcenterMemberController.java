@@ -3,14 +3,15 @@ package xyz.funnyboy.ucenterservice.controller;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.funnyboy.commonutils.JwtUtils;
 import xyz.funnyboy.commonutils.R;
+import xyz.funnyboy.commonutils.vo.UserInfoVO;
 import xyz.funnyboy.ucenterservice.entity.UcenterMember;
 import xyz.funnyboy.ucenterservice.entity.vo.LoginVO;
 import xyz.funnyboy.ucenterservice.entity.vo.RegisterVO;
-import xyz.funnyboy.ucenterservice.entity.vo.UserInfoVO;
 import xyz.funnyboy.ucenterservice.service.UcenterMemberService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -82,6 +83,20 @@ public class UcenterMemberController
         return R.ok()
                 .data("nickname", member.getNickname())
                 .data("avatar", member.getAvatar());
+    }
+
+    @ApiOperation(value = "根据id获取会员信息")
+    @GetMapping("/getInfo/remote/{id}")
+    public UserInfoVO getInfoRemote(
+            @ApiParam(name = "id",
+                      value = "会员id",
+                      required = true)
+            @PathVariable("id")
+                    String id) {
+        final UcenterMember member = memberService.getById(id);
+        UserInfoVO userInfoVO = new UserInfoVO();
+        BeanUtils.copyProperties(member, userInfoVO);
+        return userInfoVO;
     }
 }
 

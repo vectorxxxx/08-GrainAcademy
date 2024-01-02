@@ -218,9 +218,20 @@
 
     <build>
         <resources>
+            <!-- 编译main下面的xml文件和.properties文件-->
             <resource>
                 <directory>src/main/java</directory>
                 <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+            <!-- 编译resources下面的配置文件和xml文件-->
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.properties</include>
                     <include>**/*.xml</include>
                 </includes>
                 <filtering>false</filtering>

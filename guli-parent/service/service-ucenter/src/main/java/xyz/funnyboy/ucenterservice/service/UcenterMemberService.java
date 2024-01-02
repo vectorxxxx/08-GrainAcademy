@@ -1,10 +1,10 @@
 package xyz.funnyboy.ucenterservice.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import xyz.funnyboy.commonutils.vo.UserInfoVO;
 import xyz.funnyboy.ucenterservice.entity.UcenterMember;
 import xyz.funnyboy.ucenterservice.entity.vo.LoginVO;
 import xyz.funnyboy.ucenterservice.entity.vo.RegisterVO;
-import xyz.funnyboy.ucenterservice.entity.vo.UserInfoVO;
 
 /**
  * <p>

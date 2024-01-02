@@ -2,9 +2,9 @@ package xyz.funnyboy.eduservice.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import xyz.funnyboy.commonutils.vo.CoursePublishVO;
 import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
-import xyz.funnyboy.eduservice.entity.vo.CoursePublishVO;
 import xyz.funnyboy.eduservice.entity.vo.CourseQueryVO;
 import xyz.funnyboy.eduservice.entity.vo.CourseWebVO;
 

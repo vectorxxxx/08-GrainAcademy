@@ -10,11 +10,11 @@ import org.springframework.util.StringUtils;
 import xyz.funnyboy.commonutils.JwtUtils;
 import xyz.funnyboy.commonutils.MD5;
 import xyz.funnyboy.commonutils.ResultCode;
+import xyz.funnyboy.commonutils.vo.UserInfoVO;
 import xyz.funnyboy.servicebase.exception.GuliException;
 import xyz.funnyboy.ucenterservice.entity.UcenterMember;
 import xyz.funnyboy.ucenterservice.entity.vo.LoginVO;
 import xyz.funnyboy.ucenterservice.entity.vo.RegisterVO;
-import xyz.funnyboy.ucenterservice.entity.vo.UserInfoVO;
 import xyz.funnyboy.ucenterservice.mapper.UcenterMemberMapper;
 import xyz.funnyboy.ucenterservice.service.UcenterMemberService;
 
