@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import xyz.funnyboy.commonutils.JwtUtils;
 import xyz.funnyboy.commonutils.R;
 import xyz.funnyboy.orderservice.entity.TOrder;
 import xyz.funnyboy.orderservice.service.TOrderService;
@@ -37,13 +38,10 @@ public class TOrderController
                       required = true)
             @PathVariable("courseId")
                     String courseId, HttpServletRequest request) {
-        // final String memberId = JwtUtils.getMemberIdByJwtToken(request);
-        // final String orderId = orderService.createOrder(courseId, memberId);
-
-        // TODO
-        final String orderId = orderService.createOrder(courseId, "1741115981247344642");
+        final String memberId = JwtUtils.getMemberIdByJwtToken(request);
+        final String orderNo = orderService.createOrder(courseId, memberId);
         return R.ok()
-                .data("orderId", orderId);
+                .data("orderNo", orderNo);
     }
 
     @ApiOperation(value = "获取订单")
@@ -58,6 +56,27 @@ public class TOrderController
         final TOrder order = orderService.getOne(queryWrapper);
         return R.ok()
                 .data("item", order);
+    }
+
+    @ApiOperation(value = "是否购买过该课程")
+    @GetMapping("isBuyCourse/remote/{memberId}/{courseId}")
+    boolean isBuyCourse(
+            @ApiParam(name = "memberId",
+                      value = "会员ID",
+                      required = true)
+            @PathVariable("memberId")
+                    String memberId,
+
+            @ApiParam(name = "courseId",
+                      value = "课程ID",
+                      required = true)
+            @PathVariable("courseId")
+                    String courseId) {
+        final LambdaQueryWrapper<TOrder> queryWrapper = new LambdaQueryWrapper<TOrder>().eq(TOrder::getMemberId, memberId)
+                                                                                        .eq(TOrder::getCourseId, courseId)
+                                                                                        .eq(TOrder::getStatus, 1);
+        final int count = orderService.count(queryWrapper);
+        return count > 0;
     }
 }
 

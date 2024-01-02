@@ -51,7 +51,6 @@ public class TOrderServiceImpl extends ServiceImpl<TOrderMapper, TOrder> impleme
 
         // 订单信息
         final TOrder order = new TOrder();
-        order.setOrderNo("");
         // 课程信息
         order.setCourseId(courseId);
         order.setCourseTitle(courseInfo.getTitle());

@@ -7,8 +7,10 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import xyz.funnyboy.commonutils.JwtUtils;
 import xyz.funnyboy.commonutils.R;
 import xyz.funnyboy.commonutils.vo.CoursePublishVO;
+import xyz.funnyboy.eduservice.client.OrderClient;
 import xyz.funnyboy.eduservice.entity.EduCourse;
 import xyz.funnyboy.eduservice.entity.vo.ChapterVO;
 import xyz.funnyboy.eduservice.entity.vo.CourseInfoVO;
@@ -17,6 +19,7 @@ import xyz.funnyboy.eduservice.entity.vo.CourseWebVO;
 import xyz.funnyboy.eduservice.service.EduChapterService;
 import xyz.funnyboy.eduservice.service.EduCourseService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -38,6 +41,9 @@ public class EduCourseController
 
     @Autowired
     private EduChapterService eduChapterService;
+
+    @Autowired
+    private OrderClient orderClient;
 
     @ApiOperation(value = "新增课程")
     @PostMapping("addCourseInfo")
@@ -160,14 +166,22 @@ public class EduCourseController
                       value = "课程id",
                       required = true)
             @PathVariable
-                    String courseId) {
+                    String courseId, HttpServletRequest request) {
         // 课程（包含讲师、分类等相关信息）
         final CourseWebVO courseWebVO = eduCourseService.selectInfoWebById(courseId);
         // 查询课程章节信息
         final List<ChapterVO> chapterVOList = eduChapterService.getChapterVideo(courseId);
+
+        // 获取会员ID
+        final String memberId = JwtUtils.getMemberIdByJwtToken(request);
+
+        // 获取课程购买状态
+        final boolean buyCourse = orderClient.isBuyCourse(memberId, courseId);
+
         return R.ok()
                 .data("course", courseWebVO)
-                .data("chapterVOList", chapterVOList);
+                .data("chapterVOList", chapterVOList)
+                .data("isBuy", buyCourse);
     }
 
     @ApiOperation(value = "根据课程id查询课程基本信息")

@@ -14,8 +14,8 @@
         <div class="fl sao">
           <p class="red">请使用微信扫一扫。</p>
           <div class="fl code">
-            <!-- <img id="qrious" src="~/assets/img/erweima.png" alt=""> -->
-            <!-- <qriously value="weixin://wxpay/bizpayurl?pr=R7tnDpZ" :size="338"/> -->
+            <!--            <img id="qrious" src="~/assets/img/erweima.png" alt="">-->
+            <!--            <qriously :size="338" value="weixin://wxpay/bizpayurl?pr=LmfQZwfzz"/>-->
             <qriously :value="payObj.code_url" :size="338"/>
             <div class="saosao">
               <p>请使用微信扫一扫</p>
@@ -68,7 +68,7 @@ export default {
           // 消息
           this.$message({
             type: 'success',
-            message: '支付成功!'
+            message: '支付成功'
           })
           // 跳转至课程页面
           this.$router.push({ path: '/course/' + this.payObj.course_id })

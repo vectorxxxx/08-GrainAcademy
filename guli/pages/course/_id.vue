@@ -41,7 +41,10 @@
                 <a class="c-fff vam" title="收藏" href="#">收藏</a>
               </span>
             </section>
-            <section class="c-attr-mt">
+            <section v-if="isBuy || Number(course.price) === 0" class="c-attr-mt">
+              <a href="#" title="立即观看" class="comm-btn c-btn-3">立即观看</a>
+            </section>
+            <section v-else class="c-attr-mt">
               <a href="#" title="立即购买" class="comm-btn c-btn-3" @click="createOrder()">立即购买</a>
             </section>
           </section>
@@ -278,13 +281,15 @@ import order from '@/api/order'
 
 export default {
   asyncData({ params, error }) {
-    return course.getById(params.id).then(response => {
-      return {
-        courseId: params.id,
-        course: response.data.data.course,
-        chapterVOList: response.data.data.chapterVOList
-      }
-    })
+    // return course.getById(params.id).then(response => {
+    //   return {
+    //     courseId: params.id,
+    //     course: response.data.data.course,
+    //     chapterVOList: response.data.data.chapterVOList
+    //   }
+    // })
+    // 和页面异步开始的
+    return { courseId: params.id }
   },
 
   data() {
@@ -293,20 +298,36 @@ export default {
       page: 1,
       limit: 4,
       total: 10,
+      // 评论信息
       comment: {
         courseId: '',
         teacherId: '',
         content: '',
         gmtCreate: ''
-      }
+      },
+      // 课程信息
+      course: {},
+      chapterVOList: [],
+      isBuy: false
     }
   },
 
   created() {
+    // 初始化课程
+    this.initCourse()
+    // 初始化评论
     this.initComment()
   },
 
   methods: {
+    // 初始化课程
+    initCourse() {
+      return course.getById(this.courseId).then(response => {
+        this.course = response.data.data.course
+        this.chapterVOList = response.data.data.chapterVOList
+        this.isBuy = response.data.data.isBuy
+      })
+    },
     // 初始化评论详情
     initComment() {
       comment.getPageList(this.page, this.limit, this.courseId).then(response => {

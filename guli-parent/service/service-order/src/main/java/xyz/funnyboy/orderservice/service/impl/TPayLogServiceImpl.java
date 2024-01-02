@@ -60,7 +60,7 @@ public class TPayLogServiceImpl extends ServiceImpl<TPayLogMapper, TPayLog> impl
                                     .multiply(new BigDecimal("100"))
                                     .longValue() + "");
             m.put("spbill_create_ip", "127.0.0.1");
-            m.put("notify_url", ConstantPropertiesUtil.NOTIFY_URL);
+            m.put("notify_url", ConstantPropertiesUtil.NOTIFY_URL + "\n");
             m.put("trade_type", "NATIVE");
 
             //3 发送httpclient请求，传递参数xml格式，微信支付提供的固定的地址

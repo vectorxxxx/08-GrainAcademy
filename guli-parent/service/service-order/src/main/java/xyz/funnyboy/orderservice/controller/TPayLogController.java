@@ -28,7 +28,7 @@ public class TPayLogController
     private TPayLogService payLogService;
 
     @ApiOperation(value = "创建支付日志")
-    @GetMapping("createNative/{orderNo}")
+    @PostMapping("createNative/{orderNo}")
     public R createNative(
             @ApiParam(name = "orderNo",
                       value = "订单号",
@@ -56,13 +56,14 @@ public class TPayLogController
                     .message("支付出错");
         }
         // 支付成功
-        if ("SUCCESS".equals(map.get("trader_state"))) {
+        if ("SUCCESS".equals(map.get("trade_state"))) {
             // 添加记录到支付表，更新订单表订单状态
             payLogService.updateOrderStatus(map);
             return R.ok()
                     .message("支付成功");
         }
         return R.ok()
+                .code(25000)
                 .message("支付中");
     }
 }

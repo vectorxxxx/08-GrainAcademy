@@ -24,7 +24,8 @@
           <tr class="good">
             <td class="name First">
               <a :href="'https://localhost:3000/course/'+order.courseId" target="_blank">
-              <img :src="order.courseCover"></a>
+                <img :src="order.courseCover">
+              </a>
               <div class="goodInfo">
                 <input type="hidden" class="ids ids_14502" value="14502">
                 <a :href="'https://localhost:3000/course/'+ order.courseId" target="_blank">{{ order.courseTitle }}</a>

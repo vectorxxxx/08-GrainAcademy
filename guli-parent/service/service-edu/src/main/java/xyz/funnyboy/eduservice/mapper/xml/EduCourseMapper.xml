@@ -20,7 +20,7 @@
             -- 课程基本信息
             c.id,
             c.title,
-            CONVERT(c.price, DECIMAL (8.2)) as price,
+            CONVERT(c.price, DECIMAL (8, 2)) as price,
             c.lesson_num,
             c.cover,
             c.buy_count,
@@ -28,15 +28,15 @@
             -- 课程简介
             d.description,
             -- 讲师信息
-            t.id                            as teacherId,
-            t.name                          as teacherName,
+            t.id                             as teacherId,
+            t.name                           as teacherName,
             t.intro,
             t.avatar,
             -- 课程分类信息
-            s1.id                           as subjectLevelOneId,
-            s1.title                        as subjectLevelOne,
-            s2.id                           as subjectLevelTwoId,
-            s2.title                        as subjectLevelTwo
+            s1.id                            as subjectLevelOneId,
+            s1.title                         as subjectLevelOne,
+            s2.id                            as subjectLevelTwoId,
+            s2.title                         as subjectLevelTwo
         from edu_course c
                  left join edu_course_description d on c.id = d.id
                  left join edu_teacher t

@@ -30,12 +30,15 @@ service.interceptors.response.use(
      */
     const res = response.data
     if (res.code !== 20000) {
-      Message({
-        message: res.message || 'error',
-        type: 'error',
-        duration: 5 * 1000
-      })
-      return Promise.reject('error')
+      // 25000：订单支付中，不做任何提示
+      if (response.data.code !== 25000) {
+        Message({
+          message: res.message || 'error',
+          type: 'error',
+          duration: 5 * 1000
+        })
+      }
+      // return Promise.reject('error')
     } else {
       return response
     }
