@@ -31,6 +31,4 @@ public class CrmBanner extends BaseEntity
     private String linkUrl;
 
     private Integer sort;
-
-    private Integer isDeleted;
 }

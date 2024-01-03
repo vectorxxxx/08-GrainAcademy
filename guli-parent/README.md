@@ -133,3 +133,48 @@ mysql> GRANT SHOW VIEW, SELECT, REPLICATION SLAVE, REPLICATION CLIENT ON *.* TO 
 mysql> FLUSH PRIVILEGES;
 ```
 
+
+
+## 10、ObjectMapper 是什么？
+
+ObjectMapper 是一个用于将对象转换为 JSON 和将 JSON 转换为对象的 Java 库。它是一个高性能的库，具有简洁的 API，可以轻松地将 Java 对象序列化为 JSON 字符串，或将 JSON 字符串反序列化为 Java 对象。ObjectMapper 基于 Jackson 库，是 Java EE 5 和 6 的标准库之一。
+
+ObjectMapper 提供了丰富的功能，例如支持泛型、集合、日期、数字、布尔值、空值处理等。它还支持自定义序列化和反序列化器，以支持自定义类型。ObjectMapper 还提供了强大的流 API，可以处理大型 JSON 数据。
+
+总之，ObjectMapper 是一个强大的库，可以轻松地将 Java 对象转换为 JSON 字符串，或将 JSON 字符串转换为 Java 对象。
+
+
+
+## 11、CSRF 是什么？
+
+CSRF（跨站请求伪造，Cross-Site Request Forgery）是一种攻击，攻击者通过伪造 HTTP 请求来欺骗用户，从而获取用户的敏感信息，如密码、信用卡信息等。CSRF 攻击通常发生在用户登录、注销等敏感操作时。
+
+CSRF 攻击的主要原因是用户在登录后，浏览器会自动记住用户身份，从而在后续的请求中自动添加用户身份信息。攻击者可以通过修改请求头中的 Cookie 或 User-Agent 来伪造请求，从而欺骗用户。
+
+CSRF 攻击的常见方法包括：
+
+1. 伪造请求头：攻击者通过修改请求头中的 Cookie 或 User-Agent 来伪造请求。
+2. 利用 URL 重定向：攻击者通过将用户重定向到恶意网站来欺骗用户。
+3. 利用 POST 请求：攻击者通过在 POST 请求中添加恶意数据来欺骗用户。
+
+CSRF 攻击是一种非常有害的攻击，因为它可以欺骗用户并获取他们的敏感信息。为了避免 CSRF 攻击，网站需要采取一系列安全措施，例如验证请求的来源、验证用户身份等。
+
+
+
+## 12、字段修改
+
+```mysql
+# guli_e
+alter table edu_chapter
+    add is_deleted tinyint(1) unsigned default 0 not null comment '逻辑删除 1（true）已删除， 0（false）未删除';
+alter table edu_course_description
+    add is_deleted tinyint(1) unsigned default 0 not null comment '逻辑删除 1（true）已删除， 0（false）未删除';
+alter table edu_subject
+    add is_deleted tinyint(1) unsigned default 0 not null comment '逻辑删除 1（true）已删除， 0（false）未删除';
+alter table edu_video
+    add is_deleted tinyint(1) unsigned default 0 not null comment '逻辑删除 1（true）已删除， 0（false）未删除';
+# guli
+alter table statistics_daily
+    add is_deleted tinyint(1) unsigned default 0 not null comment '逻辑删除 1（true）已删除， 0（false）未删除';
+```
+

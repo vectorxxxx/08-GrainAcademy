@@ -1,6 +1,5 @@
 package xyz.funnyboy.orderservice.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -60,8 +59,4 @@ public class TOrder extends BaseEntity
 
     @ApiModelProperty(value = "订单状态（0：未支付 1：已支付）")
     private Integer status;
-
-    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
-    @TableLogic
-    private Integer isDeleted;
 }

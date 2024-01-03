@@ -1,0 +1,63 @@
+server:
+  port: 8222
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    gateway:
+      # 使用服务发现路由
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        # 设置路由ID
+        - id: service-acl
+          # 设置路由URL
+          url: lb://service-acl
+          # 设置路由断言，代理servicerId为auth-service的/auth/路径
+          predicates:
+            - Path=/*/acl/**
+        # 配置service-edu服务
+        - id: service-edu
+          url: lb://service-edu
+          predicates:
+            - Path=/eduservice/**
+        # 配置service-sms服务
+        - id: service-sms
+          url: lb://service-sms
+          predicates:
+            - Path=/smsservice/**
+        # 配置service-cms服务
+        - id: service-cms
+          url: lb://service-cms
+          predicates:
+            - Path=/cmsservice/**
+        # 配置service-ucenter服务
+        - id: service-ucenter
+          url: lb://service-ucenter
+          predicates:
+            - Path=/ucenterservice/**
+        # 配置service-order服务
+        - id: service-order
+          url: lb://service-order
+          predicates:
+            - Path=/orderservice/**
+        # 配置service-oss服务
+        - id: service-oss
+          url: lb://service-oss
+          predicates:
+            - Path=/oss/**
+        # 配置service-vod服务
+        - id: service-vod
+          url: lb://service-vod
+          predicates:
+            - Path=/vod/**
+        # 配置service-statistics服务
+        - id: service-statistics
+          url: lb://service-statistics
+          predicates:
+            - Path=/statisticsservice/**
+    # nacos
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848

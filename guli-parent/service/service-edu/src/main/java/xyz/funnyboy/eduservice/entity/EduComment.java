@@ -42,8 +42,4 @@ public class EduComment extends BaseEntity
 
     @ApiModelProperty(value = "评论内容")
     private String content;
-
-    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
-    private Integer isDeleted;
-
 }

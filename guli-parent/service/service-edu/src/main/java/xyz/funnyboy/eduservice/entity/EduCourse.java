@@ -1,6 +1,5 @@
 package xyz.funnyboy.eduservice.entity;
 
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -63,9 +62,4 @@ public class EduCourse extends BaseEntity
 
     @ApiModelProperty(value = "课程状态 Draft未发布  Normal已发布")
     private String status;
-
-    @ApiModelProperty(value = "逻辑删除 1（true）已删除， 0（false）未删除")
-    @TableLogic
-    private Integer isDeleted;
-
 }

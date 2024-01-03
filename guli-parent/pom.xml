@@ -18,6 +18,7 @@
         <module>service</module>
         <module>common</module>
         <module>canal-client</module>
+        <module>infrastructure</module>
     </modules>
 
     <properties>
