@@ -79,7 +79,7 @@
       :total="total"
       :current-page="page"
       :page-size="limit"
-      layout="total, prev, pager, next, jumper"
+      layout="total, sizes, prev, pager, next, jumper"
       style="padding: 30px 0; text-align: center;"
       @current-change="fetchData"
     />

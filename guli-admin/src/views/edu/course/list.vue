@@ -41,7 +41,7 @@
           <el-option
             v-for="teacher in teacherList"
             :key="teacher.id"
-            :label="teacher.title"
+            :label="teacher.name"
             :value="teacher.id" />
         </el-select>
       </el-form-item>
@@ -134,7 +134,7 @@
       :page-size="limit"
       :total="total"
       style="padding: 30px 0; text-align: center;"
-      layout="total, prev, pager, next, jumper"
+      layout="total, sizes, prev, pager, next, jumper"
       @current-change="fetchData" />
   </div>
 </template>
