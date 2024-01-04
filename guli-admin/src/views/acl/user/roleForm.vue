@@ -40,9 +40,9 @@ export default {
     },
     getById(userId) {
       userApi.getAssign(userId).then(response => {
-        var jsonObj = response.data.assignRoles
+        var jsonObj = response.data.assignRoleList
         this.checkedCities = this.getJsonToList(jsonObj, 'id')
-        this.cities = response.data.allRolesList
+        this.cities = response.data.allRoleList
       })
     },
     // 把json数据转成string再转成对象，根据Key获取value数据

@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletRequest;
  * @since 2024-01-01
  */
 @Api(description = "订单管理")
-@CrossOrigin
+// @CrossOrigin
 @RestController
 @RequestMapping("/orderservice/order")
 public class TOrderController

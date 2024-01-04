@@ -26,7 +26,7 @@ import java.util.Map;
  * @since 2023-12-31
  */
 @Api(description = "评论管理")
-@CrossOrigin
+// @CrossOrigin
 @RestController
 @RequestMapping("/eduservice/comment")
 public class EduCommentController

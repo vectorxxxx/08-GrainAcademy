@@ -19,7 +19,7 @@ import xyz.funnyboy.oss.service.OSSService;
 @Api(value = "阿里云文件管理")
 @RestController
 @RequestMapping("/oss")
-@CrossOrigin
+// @CrossOrigin
 public class OSSController
 {
     @Autowired

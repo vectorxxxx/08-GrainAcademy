@@ -15,7 +15,7 @@ import xyz.funnyboy.commonutils.R;
 @Api(description = "登录接口")
 @RestController
 @RequestMapping("/eduservice/user")
-@CrossOrigin
+// @CrossOrigin
 public class EduLoginController
 {
     @ApiOperation(value = "登录")

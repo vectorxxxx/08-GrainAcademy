@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
 @Api(description = "短信服务")
 @RestController
 @RequestMapping("/edusms/sms")
-@CrossOrigin
+// @CrossOrigin
 public class SmsController
 {
     @Autowired

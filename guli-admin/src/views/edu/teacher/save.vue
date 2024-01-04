@@ -111,7 +111,7 @@
           })
         }).then(response => {
           this.$router.push({
-            path: '/edu/teacher'
+            path: '/edu/teacher/list'
           })
         }).catch(reponse => {
           this.$message({
@@ -138,7 +138,7 @@
           })
         }).then(response => {
           this.$router.push({
-            path: '/edu/teacher'
+            path: '/edu/teacher/list'
           })
         }).catch(response => {
           return this.$message({

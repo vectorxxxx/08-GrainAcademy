@@ -20,7 +20,7 @@ import xyz.funnyboy.eduservice.service.EduVideoService;
 @Api(description = "课时管理")
 @RestController
 @RequestMapping("/eduservice/video")
-@CrossOrigin
+// @CrossOrigin
 public class EduVideoController
 {
     @Autowired

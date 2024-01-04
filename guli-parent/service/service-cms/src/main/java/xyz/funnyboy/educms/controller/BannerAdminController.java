@@ -21,7 +21,7 @@ import xyz.funnyboy.educms.service.CrmBannerService;
 @Api(description = "轮播图管理")
 @RestController
 @RequestMapping("/educms/banneradmin")
-@CrossOrigin
+// @CrossOrigin
 public class BannerAdminController
 {
     @Autowired

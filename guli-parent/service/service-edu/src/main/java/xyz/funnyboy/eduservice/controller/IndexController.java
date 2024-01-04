@@ -26,7 +26,7 @@ import java.util.List;
 @Api(description = "课程名师接口")
 @RestController
 @RequestMapping("/eduservice")
-@CrossOrigin
+// @CrossOrigin
 public class IndexController
 {
     @Autowired

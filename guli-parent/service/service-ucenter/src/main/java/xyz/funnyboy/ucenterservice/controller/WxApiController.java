@@ -35,7 +35,7 @@ import java.util.UUID;
 @Api(description = "微信API")
 @Controller
 @RequestMapping("/api/ucenter/wx")
-@CrossOrigin
+// @CrossOrigin
 @Slf4j
 public class WxApiController
 {

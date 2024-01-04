@@ -120,6 +120,9 @@ public class AclUserController
     @ApiOperation(value = "根据用户获取角色数据")
     @GetMapping("/toAssign/{userId}")
     public R toAssign(
+            @ApiParam(name = "userId",
+                      value = "用户ID",
+                      required = true)
             @PathVariable
                     String userId) {
         Map<String, Object> roleMap = roleService.findRoleByUserId(userId);
@@ -130,12 +133,32 @@ public class AclUserController
     @ApiOperation(value = "根据用户分配角色")
     @PostMapping("/doAssign")
     public R doAssign(
+            @ApiParam(name = "userId",
+                      value = "用户ID",
+                      required = true)
             @RequestParam
                     String userId,
+
+            @ApiParam(name = "roleIds",
+                      value = "角色ID列表",
+                      required = true)
             @RequestParam
                     String[] roleIds) {
         roleService.saveUserRoleRelationShip(userId, roleIds);
         return R.ok();
+    }
+
+    @ApiOperation(value = "根据用户id获取用户信息")
+    @GetMapping("/get/{id}")
+    public R getById(
+            @ApiParam(name = "id",
+                      value = "用户ID",
+                      required = true)
+            @PathVariable
+                    String id) {
+        final AclUser user = userService.getById(id);
+        return R.ok()
+                .data("item", user);
     }
 }
 
