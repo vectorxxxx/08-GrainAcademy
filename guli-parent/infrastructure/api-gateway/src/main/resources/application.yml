@@ -12,49 +12,49 @@ spring:
       routes:
         # 设置路由ID
         - id: service-acl
-          # 设置路由URL
-          url: lb://service-acl
-          # 设置路由断言，代理servicerId为auth-service的/auth/路径
+          # 设置路由URI
+          uri: lb://service-acl
+          # 设置路由断言，代理serviceId为auth-service的/auth/路径
           predicates:
             - Path=/*/acl/**
         # 配置service-edu服务
         - id: service-edu
-          url: lb://service-edu
+          uri: lb://service-edu
           predicates:
             - Path=/eduservice/**
         # 配置service-sms服务
         - id: service-sms
-          url: lb://service-sms
+          uri: lb://service-sms
           predicates:
             - Path=/smsservice/**
         # 配置service-cms服务
         - id: service-cms
-          url: lb://service-cms
+          uri: lb://service-cms
           predicates:
             - Path=/cmsservice/**
         # 配置service-ucenter服务
         - id: service-ucenter
-          url: lb://service-ucenter
+          uri: lb://service-ucenter
           predicates:
             - Path=/ucenterservice/**
         # 配置service-order服务
         - id: service-order
-          url: lb://service-order
+          uri: lb://service-order
           predicates:
             - Path=/orderservice/**
         # 配置service-oss服务
         - id: service-oss
-          url: lb://service-oss
+          uri: lb://service-oss
           predicates:
             - Path=/oss/**
         # 配置service-vod服务
         - id: service-vod
-          url: lb://service-vod
+          uri: lb://service-vod
           predicates:
             - Path=/vod/**
         # 配置service-statistics服务
         - id: service-statistics
-          url: lb://service-statistics
+          uri: lb://service-statistics
           predicates:
             - Path=/statisticsservice/**
     # nacos

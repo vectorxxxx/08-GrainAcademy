@@ -50,8 +50,19 @@ public class AclPermissionController
 
     @ApiOperation(value = "给角色分配权限")
     @PostMapping("/doAssign")
-    public R doAssign(String roleId, String[] permissionId) {
-        permissionService.saveRolePermissionRelationShip(roleId, permissionId);
+    public R doAssign(
+            @ApiParam(name = "roleId",
+                      value = "角色id",
+                      required = true)
+            @RequestParam("roleId")
+                    String roleId,
+
+            @ApiParam(name = "permissionIds",
+                      value = "权限id列表",
+                      required = true)
+            @RequestParam("permissionIds")
+                    String[] permissionIds) {
+        permissionService.saveRolePermissionRelationShip(roleId, permissionIds);
         return R.ok();
     }
 
@@ -71,24 +82,24 @@ public class AclPermissionController
     @ApiOperation(value = "新增菜单")
     @PostMapping("save")
     public R save(
-            @ApiParam(name = "permission",
+            @ApiParam(name = "menu",
                       value = "权限",
                       required = true)
             @RequestBody
-                    AclPermission permission) {
-        permissionService.save(permission);
+                    AclPermission menu) {
+        permissionService.save(menu);
         return R.ok();
     }
 
     @ApiOperation(value = "修改菜单")
     @PutMapping("update")
     public R updateById(
-            @ApiParam(name = "permission",
+            @ApiParam(name = "menu",
                       value = "权限",
                       required = true)
             @RequestBody
-                    AclPermission permission) {
-        permissionService.updateById(permission);
+                    AclPermission menu) {
+        permissionService.updateById(menu);
         return R.ok();
     }
 

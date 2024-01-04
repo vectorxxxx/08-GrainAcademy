@@ -82,7 +82,7 @@ public class EduTeacherController
 
             @ApiParam(name = "teacherQuery",
                       value = "查询对象",
-                      required = true)
+                      required = false)
             @RequestBody(required = false)
                     EduTeacherQuery teacherQuery) {
         final Page<EduTeacher> pageParam = new Page<>(page, limit);
@@ -105,7 +105,7 @@ public class EduTeacherController
     }
 
     @ApiOperation(value = "新增讲师")
-    @PostMapping
+    @PostMapping("save")
     public R save(
             @ApiParam(name = "eduTeacher",
                       value = "讲师对象",

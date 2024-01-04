@@ -3,6 +3,7 @@ package xyz.funnyboy.aclservice.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import java.util.Map;
  * @author VectorX
  * @since 2024-01-03
  */
+@Api(description = "用户管理")
 @RestController
 @RequestMapping("/admin/acl/user")
 public class AclUserController
@@ -131,8 +133,8 @@ public class AclUserController
             @RequestParam
                     String userId,
             @RequestParam
-                    String[] roleId) {
-        roleService.saveUserRoleRelationShip(userId, roleId);
+                    String[] roleIds) {
+        roleService.saveUserRoleRelationShip(userId, roleIds);
         return R.ok();
     }
 }

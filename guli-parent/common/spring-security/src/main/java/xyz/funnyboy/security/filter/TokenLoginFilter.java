@@ -21,7 +21,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 登录过滤器，继承UsernamePasswordAuthenticationFilter，对用户名密码进行登录校验
@@ -29,7 +28,7 @@ import java.util.List;
  * @author VectorX
  * @version 1.0.0
  * @date 2024/01/03
- * @see @see UsernamePasswordAuthenticationFilter
+ * @see UsernamePasswordAuthenticationFilter
  */
 public class TokenLoginFilter extends UsernamePasswordAuthenticationFilter
 {

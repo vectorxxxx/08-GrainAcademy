@@ -45,15 +45,13 @@ public class AclRoleController
             @PathVariable
                     Long limit,
 
-            @ApiParam(name = "role",
+            @ApiParam(name = "searchObj",
                       value = "查询条件",
                       required = false)
-                    AclRole role) {
+                    AclRole searchObj) {
         Page<AclRole> pageParam = new Page<>(page, limit);
         LambdaQueryWrapper<AclRole> wrapper = new LambdaQueryWrapper<>();
-        if (!StringUtils.isEmpty(role.getRoleName())) {
-            wrapper.like(AclRole::getRoleName, role.getRoleName());
-        }
+        wrapper.like(!StringUtils.isEmpty(searchObj.getRoleName()), AclRole::getRoleName, searchObj.getRoleName());
         roleService.page(pageParam, wrapper);
         return R.ok()
                 .data("items", pageParam.getRecords())

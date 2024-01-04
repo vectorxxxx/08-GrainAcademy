@@ -28,10 +28,10 @@ public interface AclRoleService extends IService<AclRole>
     /**
      * 根据用户分配角色
      *
-     * @param userId 用户 ID
-     * @param roleId 角色 ID
+     * @param userId  用户 ID
+     * @param roleIds 角色 ID
      */
-    void saveUserRoleRelationShip(String userId, String[] roleId);
+    void saveUserRoleRelationShip(String userId, String[] roleIds);
 
     List<AclRole> selectRoleByUserId(String id);
 }

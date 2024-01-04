@@ -20,7 +20,7 @@ export default {
   // 保存讲师
   save(teacher) {
     return request({
-      url: `${api_name}`,
+      url: `${api_name}/save`,
       method: 'post',
       data: teacher
     });

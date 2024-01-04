@@ -1,6 +1,7 @@
 package xyz.funnyboy.aclservice.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +21,7 @@ import java.util.Map;
  * @version V1.0
  * @date 2024-01-03 17:49:11
  */
+@Api(description = "首页接口")
 @RestController
 @RequestMapping("/admin/acl/index")
 public class IndexController

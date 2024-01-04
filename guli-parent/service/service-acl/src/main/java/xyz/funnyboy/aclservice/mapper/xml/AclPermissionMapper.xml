@@ -26,14 +26,14 @@
     </sql>
 
     <select id="selectAllPermissionValue" resultType="java.lang.String">
-        select permissionValue
+        select permission_value
         from acl_permission
         where type = 2
           and is_deleted = 0
     </select>
 
     <select id="selectPermissionValueByUserId" resultType="java.lang.String">
-        select p.permissionValue
+        select p.permission_value
         from acl_user_role ur
                  inner join acl_role_permission rp on rp.role_id = ur.role_id
                  inner join acl_permission p on p.id = ur.permission_id
