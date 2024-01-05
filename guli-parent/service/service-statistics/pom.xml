@@ -12,6 +12,7 @@
     <artifactId>service-statistics</artifactId>
 
     <dependencies>
+        <!-- Nacos配置服务 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>

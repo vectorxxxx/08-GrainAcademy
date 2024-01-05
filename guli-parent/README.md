@@ -178,3 +178,27 @@ alter table statistics_daily
     add is_deleted tinyint(1) unsigned default 0 not null comment '逻辑删除 1（true）已删除， 0（false）未删除';
 ```
 
+
+
+## 13、Dockerfile 文件干嘛用的？
+
+Dockerfile 是一个文本文件，其中包含用于构建 Docker 镜像的指令。Docker 镜像是一个预先编译好的应用程序，可以部署到任何支持 Docker 的平台。Dockerfile 是构建 Docker 镜像的关键文件，它定义了如何构建镜像以及如何安装应用程序所需的所有依赖项。
+
+Dockerfile 文件通常位于项目的根目录下，并且它的名称通常为"Dockerfile"。当然，你也可以为 Dockerfile 指定其他名称，但 Docker 会自动将其重命名为"Dockerfile"。
+
+Dockerfile 的主要用途包括：
+
+1. 定义镜像的基础映像：Dockerfile 的第一行通常定义了要使用的镜像，例如：FROM openjdk:8。
+2. 安装依赖项：Dockerfile 可以使用 COPY、ADD、RUN 等指令安装应用程序所需的依赖项。
+3. 配置应用程序：Dockerfile 可以使用 CMD、ENTRYPOINT 等指令配置应用程序的启动命令和入口点。
+4. 构建和打包镜像：Dockerfile 中定义了如何构建镜像，包括如何将应用程序的文件复制到镜像中。
+
+Dockerfile 的用途因项目而异，但通常用于构建和部署应用程序。例如，对于 Java 应用程序，Dockerfile 可能包括以下内容：
+
+```
+FROM openjdk:8
+COPY ./target/myapp.jar /app.jar
+CMD java -jar /app.jar
+```
+
+这将从 OpenJDK 8 镜像中构建应用程序，并将应用程序的 jar 文件复制到镜像中，最后使用 java 命令启动应用程序。
